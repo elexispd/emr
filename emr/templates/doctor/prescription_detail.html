@@ -1,0 +1,40 @@
+﻿{% extends "main.html" %}
+
+{% load static %}
+
+{% block 'content' %}
+      <!-- theme body start-->
+      <div class="theme-body common-dash" data-simplebar="">
+        <div class="container-fluid">
+          <div class="row">        
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header">
+                  <h4>Prescription Detail</h4>
+                </div>
+                <div class="card-body"> 
+                  <form>
+                    <div class="row">
+             
+                       
+                      <div class="form-group col-md-4">
+                        <div class="form-label">Title</div>
+                        <input class="form-control" type="text" value="" placeholder="First Name" disabled>
+                      </div>
+                     
+                      <div class="form-group col-md-6">
+                        <div class="form-label">Observation</div>
+                        <textarea disabled class="form-control" cols="30" rows="2" placeholder="Patient History">Nothing</textarea>
+                      </div>
+
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- theme body end-->
+ 
+{% endblock 'content' %}

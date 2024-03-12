@@ -1,0 +1,111 @@
+﻿
+{% extends "main.html" %}
+
+{% load static %}
+{% load custom_filters %}
+
+{% block 'content' %}
+      <div class="theme-body">
+        <div class="container-fluid cdxuser-profile">
+          <div class="row d-flex justify-content-center">
+
+            <div class="col-md-8">
+              <div class="card" style="padding-inline: 20px;">
+                <div class="card-header">
+                  <h4>Patient Bio Data</h4>
+                </div>
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <ul class="contact-list">
+                      <li> <span>Name:</span> {{ patient.first_name }} {{ patient.last_name }} </li>
+                      <li> <span>Card number:</span> {{ patient.card_number }} </li>
+                      <li> <span>Date of Birth:</span> {{ patient.dob }} </li>
+                      <li> <span>Phone Number:</span> {{ patient.phone_number }} </li>
+                      <li> <span>Gender:</span> {{ patient.gender }} </li>
+                      <li> <span>Patient Type:</span> {{ patient.patient_type }} </li>
+                      <li> <span>Occupation:</span>{{ patient.occupation }}</li>
+                      <li> <span>Marital Status:</span>{{ patient.marriage_status }}</li>
+                      <li> <span>Ethincity:</span>{{ patient.ethnic_group }}</li>
+                      <li> <span>Religion:</span>{{ patient.religion }}</li>
+                      <li> <span>Assigned Doctor:</span>{{ patient.doctor }} - {{ patient.doctor.doctor_specialization }} </li>
+                      <li> <span>Chief Consulatant:</span>{{ patient.doctor.is_chief_consultant }}</li>
+                      <li> <span>Next Of Kin:</span>{{ patient.next_of_kin }}</li>
+                      <li> <span>Address Of Next Of Kin:</span>{{ patient.address_of_kin }}</li>
+                      <li> <span>Phone Number Of Next Of Kin:</span>{{ patient.next_of_kin_phone }}</li>
+                      <li> <span>Card Status:</span>
+                          {% if patient.card_number.expiration_date|is_card_expired %}
+                          <span class="badge badge-danger" id="expired">Expired</span>
+                          {% else %}
+                          <span class="badge badge-success" id="expired">Active</span>
+                          {% endif %}
+
+                        </li>
+                    </ul>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+
+  
+          {% if user.department.name == "Doctor" %}
+          <div class="row d-flex justify-content-center">
+            <div class="col-6 card-foote px-2 py-5 d-flex justify-content-start">
+              <a class="btn btn-primary d-block mx-auto btn-lg disable" href="{% url "prescriptions" user_id=patient.id %}">Prescriptions</a>
+              <a  class="btn btn-primary d-block mx-auto btn-lg"  href="{% url "patient_lab_tests" patient.id %}"> View Lab/Result</a>  
+              <a class="btn btn-primary d-block mx-auto btn-lg" href="{% url "scheduled_appointments" %}?q={{ patient.id }}">Scheduled Appointment</a>            
+            </div>
+          </div>
+          {% endif %}
+
+          {% if user.department.name == "Records" %}
+          <div class="row d-flex justify-content-center">
+            <div class="col-6 card-foote px-2 py-5 d-flex justify-content-start">
+              <a class="btn btn-primary d-block mx-auto btn-lg disable" href="{% url "book_appointment" patient.id %}">Book Appointment</a>
+              <a class="btn btn-primary d-block mx-auto btn-lg" href="{% url "scheduled_appointments" %}?q={{ patient.id }}">Scheduled Appointment</a>
+              <a class="btn btn-primary d-block mx-auto btn-lg" href="{% url "update_patient" patient.id %}">Edit Record</a>
+            </div>
+          </div>
+          {% endif %}
+
+          
+          {% if user.department.name == "Lab" %}
+          <div class="row d-flex justify-content-center">
+            <div class="col-6 card-foote px-2 py-5 d-flex justify-content-start">
+              <a  class="btn btn-primary d-block mx-auto btn-lg disable"  href="{% url "add_lab_test" patient.id %}"> Add Test</a>
+              <a  class="btn btn-primary d-block mx-auto btn-lg"  href="{% url "patient_lab_tests" patient.id %}"> View Test</a>
+              {% comment %} <a  class="btn btn-primary d-block mx-auto btn-lg"  href=""> View Lab Results </a> {% endcomment %}
+            </div>
+          </div>
+          {% endif %}
+
+          
+         
+
+        </div>
+
+
+        
+      </div>
+
+      <script>
+        var is_expired = $('#expired').text();
+        if (is_expired === "Expired") {
+          
+            $('.disable').click(function(event) {
+              event.preventDefault();
+              cuteAlert({
+                type: "error",
+                title: "Expired Card",
+                message: "This patient's card needs to be renewed",
+                buttonText: "OK"
+              })
+            });
+        }
+    </script>
+    
+
+
+{% endblock 'content' %}

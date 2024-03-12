@@ -1,0 +1,152 @@
+﻿{% extends "main.html" %}
+
+{% load static %}
+
+{% comment %} Check for super admin later {% endcomment %}
+{% block 'content' %}
+    <div class="theme-body common-dash" data-simplebar="">      
+        <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-6">
+            <div class="card hos-welcome">
+                <div class="card-body">
+                <h3 class="text-dark">Welcome to<br> <span class="text-info" >PESOWP</span> EMR</h3>
+                <p style="color: #8392a5;">Providing seemless solutions</p>
+                </div>
+            </div>
+            </div>
+            <div class="col-lg-6">
+            <div class="row">
+                <div class="col-sm-6">
+                <div class="card hosinfo-count">
+                    <div class="card-body">
+                    <div class="media">
+                        <div class="icon-wrap bg-warning"><i class="icofont-patient-bed"></i></div>
+                        <div class="count-detail">
+                        <h3><span class="counter mr-5">{{ nurse_total }}</span>Nurses</h3>
+                        <p>Total Nurses</p>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                </div>
+                <div class="col-sm-6">
+                <div class="card hosinfo-count">
+                    <div class="card-body">
+                    <div class="media">
+                        <div class="icon-wrap bg-secondary"><i class="icofont-doctor"></i></div>
+                        <div class="count-detail">
+                        <h3><span class="counter mr-5">{{ doctor_total }}</span>Doctors</h3>
+                        <p>Available Doctors</p>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                </div>
+                <div class="col-sm-6">
+                <div class="card hosinfo-count">
+                    <div class="card-body">
+                    <div class="media">
+                        <div class="icon-wrap bg-success"><i class="icofont-medicine"></i></div>
+                        <div class="count-detail">
+                        <h3><span class="counter mr-5">{{ pharmacist_total }}</span>Pharmacists</h3>
+                        <p>Pharmacy Medics</p>
+                        </div>
+                    </div>
+                    </div>
+                </div> 
+                </div>
+                <div class="col-sm-6">
+                <div class="card hosinfo-count">
+                    <div class="card-body">
+                    <div class="media">
+                        <div class="icon-wrap bg-info"><i class="icofont-ambulance-cross"></i></div>
+                        <div class="count-detail">
+                        <h3><span class="counter mr-5">{{ record_total }}</span>Records</h3>
+                        <p>All Records</p>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+            </div>
+
+            {% if user.department.name == 'Admin' %}
+           
+            <div class="col-xxl-6 col-lg-6">
+                <div class="card patientvisits-tbl">
+                    <div class="card-header">
+                    <h4>Staff</h4>
+                    </div>
+                    <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" style="width:100%;">
+                        <thead>
+                            <tr>
+                            <th>S/N</th>
+                            <th>Full Name</th>
+                            <th>Department</th>
+                            <th>Email</th>
+                            <th>Username</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+      
+                            {% for random_staff in staff %}
+                            <tr>
+                            <td> {{ forloop.counter }} </td>
+                            <td> {{ random_staff.first_name }}  {{ random_staff.last_name }} </td>
+                            <td> {{ random_staff.department.name }} </td>
+                            <td> {{ random_staff.email }} </td>
+                            <td> {{ random_staff.username }} </td>
+                            </tr>    
+                            {% endfor %}               
+                        </tbody>
+                        </table>
+                        <br>
+                        <a href="{% url "search_staff" %}" class="btn btn-primary">View ALL</a>
+                    </div>
+                    </div>
+                </div>
+            </div>
+
+            {% endif %}
+
+            <div class="col-xxl-{% if user.department.name != 'Admin' %}12 {% else %} 6 {% endif %}  col-lg-6">
+                <div class="card patientvisits-tbl">
+                    <div class="card-header">
+                    <h4>Patients</h4>
+                    </div>
+                    <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" style="width:100%;">
+                            <thead class="text-left">
+                                <tr>
+                                <th>S/N</th>
+                                <th>Full Name</th>
+                                <th>Phone Number</th>
+                                <th>Address OF Next Of Kin</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for patient in patients %}
+                                <tr>
+                                <td> {{ forloop.counter }} </td>
+                                <td> {{ patient.first_name }} {{ patient.last_name }} </td>
+                                <td>{{ patient.phone_number }}</td>
+                                <td>{{ patient.address_of_kin }}</td>
+                                </tr>  
+                                {% endfor %}                 
+                            </tbody>
+                            </table>
+                            <br>
+                         <a href="{% url "get_patients" %}" class="btn btn-primary">View ALL</a>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+{% endblock 'content' %}

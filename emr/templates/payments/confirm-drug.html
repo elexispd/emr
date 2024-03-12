@@ -1,0 +1,90 @@
+{% extends "main.html" %}
+
+{% load static %}
+
+{% block 'content' %}
+
+    <div class="theme-body codex-chat">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <div class="card">  
+              <div class="card-body">
+                <table class="doctorslist-tbl table" id="doctorslist-tbl" style="width:100%;">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Brand</th>
+                      <th>Price</th>
+                      <th>Quantity</th>
+                      <th>Total Price</th>
+                      <th>Date</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+
+                    {% for sold_drug in sold_drugs %}
+                    <tr>
+                      <td> {{ sold_drug.drug }} </td>
+                      <td> {{ sold_drug.drug.brand }} </td>
+                      <td> <strike>N</strike>{{ sold_drug.price }} </td>
+                      <td> {{ sold_drug.quantity }} </td>
+                      <td><strike>N</strike>{{ sold_drug.total_price }}</td>
+                      <td> {{ sold_drug.updated_at }} </td>
+                      <td>
+                        {% if sold_drug.status == 'pending' %}
+                            <span class="badge badge-warning" >Pending</span>
+                        {% elif sold_drug.status == 'paid' %}
+                        <span class="badge badge-primary" >Paid</span>
+                        {% else %}
+                        <span class="badge badge-success" >Dispensed</span>
+                        {% endif %}
+                       </td> 
+                    </tr>
+
+                    {% endfor %}
+                 
+                                     
+                  </tbody>
+                  <tfoot>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            <form action="" method="post">
+                                {% csrf_token %}
+                                <div class="form-group text-center mb-0">
+                                    <h4>Total Price</h4>
+                                    <h5> <strike>N</strike>{{ total_price }} </h5>
+                                </div>
+                                
+                                <div class="form-group  text-center mb-0">
+                                    
+                                    {% if status == 'pending' %}
+                                    <button type="submit" class="btn btn-sm btn-primary">Confirm Payment</button>
+                                    {% else %}
+                                    <a class="btn btn-sm btn-success">Paid</a>
+                                    <a href="{% url "invoice" billing_id %}" class="btn btn-sm btn-primary">Invoice</a>
+                                    {% endif %}
+                                </div>
+                                
+                            </form>
+                        </td>
+                    </tr>
+                  </tfoot>
+                </table>
+              </div>
+             
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+{% endblock 'content' %}
+ 

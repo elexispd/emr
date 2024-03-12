@@ -1,0 +1,94 @@
+{% extends "main.html" %}
+
+{% load static %}
+
+{% block 'content' %}
+      <!-- theme body start-->
+      <div class="theme-body common-dash" data-simplebar="">
+        <div class="container-fluid">
+          <div class="row">        
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header">
+                    <div>
+                        <h4>Confirm Card Payment</h4>
+                    </div>
+                 
+                </div>
+                <div class="card-body"> 
+                    {% if messages %}
+                  <div class="messages">
+                      {% for message in messages %}
+                      <div class="alert alert-{{ message.tags }}">
+                          {{ message }}
+                      </div>
+                      {% endfor %}
+                  </div>
+                {% endif %}
+                  <form method="post">
+                    {% csrf_token %}
+                    <div class="row">
+             
+                       
+                      <div class="form-group col-md-4" id="payment_div">
+                        <div class="form-label">Payment Type</div>
+                        
+                        <select name="payment_type" id="type" class="form-control" >
+                            <option value=""></option>
+                            {% for payment_type in payment_types %}
+                            <option value="{{ payment_type.id }}"   data-price="{{ payment_type.price }}"> {{ payment_type.card_type|upper }} </option>
+                            {% endfor %}
+                        </select>
+
+                        
+
+                      </div>
+                       
+                      <div class="form-group col-md-4" id="payment_div">
+                        <div class="form-label">Payment Method</div>
+                        
+                        <select name="payment_method" id="type" class="form-control" required >
+                            <option value=""></option>  
+                            <option value="cash">Cash</option>  
+                            <option value="transfer">Transfer</option>  
+                        </select>
+                      </div>
+                       
+                     
+
+                      <div class="form-group col-md-4">
+                        <div class="form-label">Price</div>
+                        <input class="form-control" type="text" id="price" required value="" disabled>
+                      </div>
+                       
+                     
+                      <div class="form-group text-end mb-0">          
+                          <button type="submit" class="btn btn-sm btn-primary">Pay</button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- theme body end-->
+      <script>
+        $('#type').on('change',  function(){
+            var selectedPrice = $(this).find(':selected').data('price');
+            $('#price').val(selectedPrice);
+            var selectedInput = $(this).find(':selected').text().trim();
+            if(selectedInput == "RENEW") {
+              $('#card_number').remove();
+              $('<div class="form-group col-md-4" id="card_number">' +
+                '<div class="form-label">Card Number</div>' +
+                '<input type="text" class="form-control" name="card_number" >' +
+                '</div>').insertAfter($('#payment_div').closest('.form-group'));
+            } else{
+              $('#card_number').remove();
+            }
+
+        });
+    </script>
+{% endblock 'content' %}

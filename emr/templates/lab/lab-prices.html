@@ -1,0 +1,42 @@
+
+{% extends "main.html" %}
+
+{% load static %}
+
+{% block 'content' %}
+  <!-- theme body start-->
+      <div class="theme-body codex-chat">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-12">
+              <div class="card">  
+                <div class="card-body">
+                  <table class="doctorslist-tbl table" id="doctorslist-tbl" style="width:100%;">
+                    <thead>
+                      <tr>
+                        <th>S/N</th>
+                        <th>Test Caption</th>
+                        <th>Price</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for test in tests %}
+                      <tr>
+                        <td> {{ forloop.counter }} </td>
+                        <td> {{ test.name }} </td>
+                        <td> <strike>N</strike>{{ test.price }} </td>
+                      </tr>
+                      {% endfor %}
+                     
+
+                    </tbody>
+                  </table>
+                </div>
+               
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+{% endblock 'content' %}

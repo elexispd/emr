@@ -1,0 +1,46 @@
+{% extends "main.html" %}
+
+{% load static %}
+
+{% block 'content' %}
+
+    <div class="theme-body codex-chat">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <div class="card">  
+              <div class="card-body">
+
+                
+
+                <table class="doctorslist-tbl table" id="doctorslist-tbl" style="width:100%;">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Consulatant</th>
+                      <th>Appointment Date</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+
+                    {% for appointment in scheduled_appointments %}
+
+                    <tr>
+                      <td> {{ appointment.patient }} </td>
+                      <td> {{ appointment.doctor }} </td>
+                      <td> {{ appointment.appointment_date }} </td>         
+                    </tr>                   
+                    {% endfor %}
+                                                    
+                  </tbody>
+                </table>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+{% endblock 'content' %}
+ 

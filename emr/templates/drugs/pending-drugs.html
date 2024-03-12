@@ -1,0 +1,62 @@
+
+{% extends "main.html" %}
+
+{% load static %}
+
+{% block 'content' %}
+      <!-- theme body start-->
+      <div class="theme-body">       
+        <div class="container-fluid">      
+          <div class="row">
+            <div class="col-12">
+              <div class="card">  
+                <div class="card-body"> 
+                
+                  <table class="payment-tbl table">
+                    <thead>
+                      <tr>
+                        <th>S/N</th>                                            
+                        <th>Order ID</th> 
+                        <th>Number Of Drugs</th>                                    
+                        <th>Status</th>                      
+                        <th>Action</th>                      
+                      </tr>
+                    </thead>
+                    <tbody>
+               
+                       {% for sold_drug in sold_drugs %}
+                      
+                      <tr>
+                          <td>{{ forloop.counter }}</td>                          
+                          <td>{{ sold_drug.order_id }} </td>  
+                          <td>{{ sold_drug.total_sold }} </td>
+                          <td>
+                            {% if sold_drug.status == 'pending' %}
+                                <span class="badge badge-warning" >Pending</span>
+                            {% elif sold_drug.status == 'paid' %}
+                            <span class="badge badge-primary" >Paid</span>
+                            {% else %}
+                            <span class="badge badge-success" >Dispensed</span>
+                            {% endif %}
+                           </td>  
+                          <td>
+                            <a href="{% url "drug_history_detail" sold_drug.order_id %}">view</a>
+                          </td>
+                         
+                      </tr>
+                      {% endfor %}
+                      
+                      
+                    </tbody>
+                  </table>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+{% endblock 'content' %}
+    

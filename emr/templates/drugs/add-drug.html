@@ -1,0 +1,68 @@
+﻿{% extends "main.html" %}
+
+{% load static %}
+
+{% block 'content' %}
+      <!-- theme body start-->
+      <div class="theme-body  codex-chat common-dash" data-simplebar="">
+        <div class="container-fluid">
+          <div class="row">        
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header">
+                  <h4>Add Drugs</h4>
+                </div>
+                <div class="card-body"> 
+                  {% if messages %}
+                  {% include 'alert.html' %}
+                {% endif %}
+                  <form method="POST">
+                    {% csrf_token %}
+                    <div class="row">
+                      <div class="form-group col-md-6">
+                        <div class="form-label">Name</div>
+                        {{ form.name }}
+                        {% for error in form.name.errors %}
+                            <span class="text-danger">{{ error }}</span>
+                        {% endfor %}
+                      </div>
+                      <div class="form-group col-md-6">
+                        <div class="form-label">Brand</div>
+                        {{ form.brand }}
+                        {% for error in form.brand.errors %}
+                            <span class="text-danger">{{ error }}</span>
+                        {% endfor %}
+                      </div>
+                      <div class="form-group col-md-6">
+                        <div class="form-label">Price</div>
+                        {{ form.price }}
+                        {% for error in form.price.errors %}
+                            <span class="text-danger">{{ error }}</span>
+                        {% endfor %}
+                      </div>
+                      <div class="form-group col-md-6">
+                        <div class="form-label">Quantity</div>
+                        {{ form.quantity }}
+                        {% for error in form.quantity.errors %}
+                            <span class="text-danger">{{ error }}</span>
+                        {% endfor %}
+                      </div>
+                      <div class="form-group text-end mb-0">
+                        <button type="submit" class="btn btn-sm btn-primary" >
+                          {% if not edit %}
+                              Add
+                          {% else %}
+                              Update
+                          {% endif %}
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+{% endblock 'content' %}

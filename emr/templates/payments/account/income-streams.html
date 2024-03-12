@@ -1,0 +1,45 @@
+
+{% extends "main.html" %}
+
+{% load static %}
+
+{% block 'content' %}
+  <!-- theme body start-->
+      <div class="theme-body codex-chat">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-12">
+              <div class="card">  
+                <div class="card-body">
+
+                <h4 class="title text-muted"> Search Result </h4>
+            
+                  <table class="doctorslist-tbl table" id="doctorslist-tbl" style="width:100%;">
+                    <thead>
+                      <tr>
+                        <th>S/N</th>
+                        <th>Stream</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+
+                      {% for stream in streams %}
+                      <tr>
+                        <td> {{ forloop.counter }} </td>
+                        <td> {{ stream.name }} </td>
+                        <td> <a href=""> <i class="icofont-edit"></i> </a> </td>
+                      </tr>
+                      {% endfor %}
+
+                    </tbody>
+                  </table>
+                </div>
+               
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+{% endblock 'content' %}

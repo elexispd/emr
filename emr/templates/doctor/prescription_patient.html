@@ -1,0 +1,49 @@
+
+{% extends "main.html" %}
+
+{% load static %}
+
+{% block 'content' %}
+  <!-- theme body start-->
+      <div class="theme-body codex-chat">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-12">
+              <div class="card">  
+                <div class="card-body">
+                  <h4 class="title text-muted">{{ name }} - Prescription Record</h4>
+                    <a class="btn btn-primary float-end mb-15" href="{% url "appointments"  %}" >
+                        <i class="ti-plus fw-700 mr-10"></i>Add Prescription</a>
+                  <table class="doctorslist-tbl table" id="doctorslist-tbl" style="width:100%;">
+                    <thead>
+                      <tr>
+                        
+                        <th>Doctor</th>
+                        <th>Prescription Date</th>
+                       
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for patient_prescription in patient_prescriptions %}
+                        <tr>  
+                          <td> {{ patient_prescription.appointment.doctor }} </td>
+                          <td> {{ patient_prescription.created_at }} </td>
+                        
+                          <td>
+                            <a href="{% url "add_prescription" patient_prescription.appointment.patient_id patient_prescription.appointment_id  %}"><i class="w-18" data-feather="eye"></i></a>
+                          </td>
+                        </tr>
+                      {% endfor %}
+
+                    </tbody>
+                  </table>
+                </div>
+               
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+{% endblock 'content' %}

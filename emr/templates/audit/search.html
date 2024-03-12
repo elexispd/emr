@@ -1,0 +1,135 @@
+
+{% extends "main.html" %}
+
+{% load static %}
+
+{% comment %} Check for super admin later {% endcomment %}
+{% block 'content' %}
+      <div class="theme-body common-dash" data-simplebar="">
+        <div class="container-fluid">
+          <div class="row">        
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header">
+                  <h4>Report Generation</h4>
+                </div>
+                <div class="card-body"> 
+                  {% if messages %}
+                      {% include 'alert.html' %}
+                  {% endif %}
+
+                    <div class="row">
+                        
+
+
+                        <div class="col-md-6">
+                            <form method="POST" action="{% url 'generated_bill_report' %}">
+                                {% csrf_token %}         
+                                <div class="form-label"> <strong>Search Today</strong>  </div>
+                                <div class="form-group">
+                                    <input type="date" class="form-control" name="date" id="today" readonly>
+                                </div>
+
+                                <div class="form-group col-md-4 pt-5">
+                                <button class="btn btn-sm btn-primary mt-5" name="today" type="submit" >Generate</button>
+                                </div>                            
+                            </form>
+                        </div> 
+
+                        <div class="col-md-6">
+                            <form method="POST" action="{% url 'generated_bill_report' %}">
+                                {% csrf_token %}         
+                                <div class="form-label"> <strong>Search All Time</strong>  </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="all_time" id="from" value="All Transactions" readonly>
+                                </div>
+
+                                <div class="form-group col-md-4 pt-5">
+                                <button class="btn btn-sm btn-primary mt-5" name="all_time" type="submit" >Generate</button>
+                                </div>                            
+                            </form>
+                        </div> 
+
+                        <div class="col-md-6">
+                            <form method="POST" action="{% url 'generated_bill_report' %}">
+                                {% csrf_token %}         
+                                <div class="form-label"> <strong>Search By Date</strong>  </div>
+                                <div class="form-group">
+                                    <label for="from"> From: </label>
+                                    <input type="date" class="form-control" name="from_date" id="from">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="from"> To: </label>
+                                    <input type="date" class="form-control" name="to_date" id="to">
+                                </div>
+                                
+                                <div class="form-group col-md-4 pt-5">
+                                <button class="btn btn-sm btn-primary mt-5" name="date_range" type="submit" >Generate</button>
+                                </div>                            
+                            </form>
+                        </div> 
+
+                        <div class="col-md-6">
+                            <form method="POST" action="{% url 'generated_bill_report' %}">
+                                {% csrf_token %}         
+                                <div class="form-label"> <strong>Search By Payment Type &amp; Date</strong>  </div>
+
+                                  <div>
+                                    <label for="type"> Payment: </label>
+                                    <select name="service_type" id="" class="form-control">
+                                        <option></option>
+                                        <option value="Consultation">Consulation</option>
+                                        <option value="NewCard">New Card</option>
+                                        <option value="CardRenewal">Card Renewal</option>
+                                        <option value="LabTest">Lab Test</option>
+                                        <option value="DrugSale">Drug</option>
+                                        <option value="Xray">Xray</option>
+                                    </select>
+                                  </div>
+                              
+                                <div class="d-flex justify-content-between">
+                                    <div class="form-group">
+                                      <label for="from"> From: </label>
+                                      <input type="date" class="form-control" name="from_date" id="from">
+                                    </div>
+
+                                    <div class="form-group">
+                                      <label for="from"> To: </label>
+                                      <input type="date" class="form-control" name="to_date" id="to">
+                                    </div>                               
+                                </div>
+
+                                
+
+                                <div class="form-group col-md-4 pt-5">
+                                <button class="btn btn-sm btn-primary mt-5" name="payment_type" type="submit" >Generate</button>
+                                </div>                            
+                            </form>
+                        </div>  
+
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <script>
+        // Get today's date
+        var today = new Date();
+    
+        // Format the date to YYYY-MM-DD (required by input type date)
+        var yyyy = today.getFullYear();
+        var mm = String(today.getMonth() + 1).padStart(2, '0'); // January is 0!
+        var dd = String(today.getDate()).padStart(2, '0');
+        var formattedDate = yyyy + '-' + mm + '-' + dd;
+    
+        // Set the default value of the input field to today's date
+        document.getElementById('today').value = formattedDate;
+    </script>
+
+{% endblock 'content' %}
+  

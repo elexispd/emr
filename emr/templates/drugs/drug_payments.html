@@ -1,0 +1,65 @@
+
+{% extends "main.html" %}
+
+{% load static %}
+
+{% block 'content' %}
+      <!-- theme body start-->
+      <div class="theme-body">       
+        <div class="container-fluid">      
+          <div class="row">
+            <div class="col-12">
+              <div class="card">  
+                <div class="card-body"> 
+                
+                  <table class="payment-tbl table">
+                    <thead>
+                      <tr>
+                        <th>S/N</th>
+                        <th>Order ID</th>                                   
+                        <th>Status</th>                      
+                        <th>Action</th>  
+                      </tr>
+                    </thead>
+                    <tbody>
+                    
+                       {% for payment in payments %}
+                      
+                      <tr>
+                          <td>{{ forloop.counter }}</td>
+                          <td>{{ payment.sold_drug.order_id }} </td> 
+                          <td>
+                            {% if payment.sold_drug.status == 'pending' %}
+                                <span class="badge badge-warning" >Pending</span>
+                            {% elif payment.sold_drug.status == 'paid' %}
+                            <span class="badge badge-primary" >Paid</span>
+                            {% else %}
+                            <span class="badge badge-success" >Dispensed</span>
+                            {% endif %}
+                           </td>  
+                          <td>
+                            {% if payment.sold_drug.status == 'pending' %}
+                            <a href="{% url "confirm_drug_payment"  payment.sold_drug.order_id  %}"><i class="w-18" data-feather="edit"></i></a>
+                            {% else  %}
+                            <a href="{% url "confirm_drug_payment" payment.sold_drug.order_id %}"><i class="w-18" data-feather="eye"></i></a> 
+                              
+                            {% endif %} 
+                      
+                          </td>
+                      </tr>
+                      {% endfor %}
+                      
+                      
+                    </tbody>
+                  </table>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+{% endblock 'content' %}
+    

@@ -1,0 +1,165 @@
+
+ 
+{% extends "main.html" %}
+
+{% load static %}
+
+{% block 'content' %}  
+   
+   <div class="theme-body common-dash" data-simplebar="">
+
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header">
+                  <h4>Add Prescription</h4>
+                </div>
+                <div class="card-body"> 
+                  <form id="patientForm" method="post">
+                    {% csrf_token %}
+                      <div class="row">
+                        <div class="form-group col-md-12">
+                          <div class="form-label">
+                            <h5 class="title"> Patient: {{ appointment.patient }}  </h5>
+                          </div>      
+                        </div>
+
+                        {% if messages %}
+                          {% include "alert.html" %}
+                        {% endif %}
+      
+
+                        <div class="form-group col-md-6">
+                          <div class="form-label">Complaint</div>
+                          {{ form.complaint }}
+                          {% for error in form.complaint.errors %}
+                            <span class="text-danger">{{ error }}</span>
+                        {% endfor %}
+                        </div>
+                        <div class="form-group col-md-6">
+                          <div class="form-label">Examination</div>
+                          {{ form.examination }}
+                          {% for error in form.examination.errors %}
+                            <span class="text-danger">{{ error }}</span>
+                        {% endfor %}
+                        </div>
+                        <div class="form-group col-md-6">
+                          <div class="form-label">Diagnosis</div>
+                          {{ form.diagnosis }}
+                          {% for error in form.diagnosis.errors %}
+                            <span class="text-danger">{{ error }}</span>
+                        {% endfor %}
+                        </div>
+                        <div class="form-group col-md-6">
+                          <div class="form-label">Plan</div>
+                          {{ form.plan }}
+                          {% for error in form.plan.errors %}
+                            <span class="text-danger">{{ error }}</span>
+                        {% endfor %}
+                        </div>
+
+                       
+                        
+                        <div id="duplicated-inputs-container" class="duplicated-inputs-container rounded ms-3" style="border: 1px dashed lightgray; margin-bottom: 25px; padding-bottom: 15px; width: 97.2%;">
+                          {% if drugs %}
+                              {% for drug in drugs %}
+                                  <div class="d-flex justify-content-between flex-wrap p-4 pt-5 duplicated-inputs rounded" style="margin-bottom: 5px; margin-top: 10px;">
+                                      <div class="form-group col-md-3">
+                                          <div class="form-label">Drug Name</div>
+                                          <input type="text" class="form-control disabled" name="drug[]" value="{{ drug.drug }}">
+                                      </div>
+                                      <div class="form-group col-md-3">
+                                          <div class="form-label">Dosage</div>
+                                          <input class="form-control disabled" type="number" name="dosage[]" value="{{ drug.dosage }}">
+                                      </div>
+                                      <div class="form-group col-md-2">
+                                          <div class="form-label">Frequency</div>
+                                          <input class="form-control disabled" type="text" name="frequency[]" value="{{ drug.frequency }}">
+                                      </div>
+                                      <div class="form-group col-md-2">
+                                          <div class="form-label">Duration</div>
+                                          <input class="form-control disabled" type="text" name="duration[]" value="{{ drug.duration }}">
+                                      </div>
+                                  </div>
+                              {% endfor %}
+                          {% else %}
+                            <div class="d-flex justify-content-between flex-wrap p-4 pt-5 duplicated-inputs rounded" style="margin-bottom: 5px; margin-top: 10px;">
+                                <div class="form-group col-md-3">
+                                    <div class="form-label">Drug Name</div>
+                                    <input type="text" class="form-control" name="drug[]">
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <div class="form-label">Dosage</div>
+                                    <input class="form-control" type="number" name="dosage[]">
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <div class="form-label">Frequency</div>
+                                    <input class="form-control" type="text" name="frequency[]">
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <div class="form-label">Duration</div>
+                                    <input class="form-control" type="text" name="duration[]">
+                                </div>
+                            </div>
+                          {% endif %}
+                          <input class="btn btn-sm btn-primary ms-3  disabled" type="button" value="Add More" onclick="duplicateForm()">
+                      </div>
+
+                      
+                  
+                        <div class="form-group text-end mb-0">
+                          {% if has_prescription %}
+                          <a class="btn btn-sm btn-success">Prescription Taken</a>
+                          {% else %}
+                          <button type="submit" class="btn btn-sm btn-primary">Submit</button>
+                          {% endif %}
+                          
+                        </div>
+
+
+                      </div>
+                  </form>
+
+                  <form method="POST" action="{% url "book_appointment_doctor" appointment.patient_id appointment.id %}">
+                    {% csrf_token %}
+                    <div class="form-group col-md-12">
+                      <div class="form-label">
+                        <h5 class="title"> Schedule Next Appointment  </h5>
+                      </div>    
+                      <div class="form-group col-md-6">
+                        <div class="form-label">Date</div>
+                        <input type="date" name="date" class="form-control" id="">
+                        <input type="hidden" value="{{ appointment.patient_id }}" hidden>
+
+                      </div>  
+                      <div class="form-group col-md-6">
+                        <button type="submit" class="btn btn-sm btn-primary">Schedule</button>
+                      </div>  
+                    </div>
+                  </form>
+
+                </div>
+              </div>
+            </div>
+
+            
+
+          </div>
+        </div>
+    </div>
+      <!-- theme body end-->
+
+
+      <script>
+        var has_prescription = {{ has_prescription }};
+        if (has_prescription == 1) {
+            $(".disabled").attr("disabled", "disabled");
+            $("textarea").attr("disabled", "disabled");
+        }
+    </script>
+
+    
+ {% endblock 'content' %}
+
+

@@ -1,0 +1,172 @@
+﻿{% extends "main.html" %}
+
+{% load static %}
+
+{% block 'content' %}
+
+    <div class="theme-body codex-chat">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <div class="card">  
+              <div class="card-body">
+
+                
+
+                <table class="doctorslist-tbl table" id="doctorslist-tbl" style="width:100%;">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Consulatant</th>
+                      <th>Arrived</th>
+                      <th>Status</th>
+                      <th>Vital Signs</th>
+                      {% if user.department.name == "Doctor" %}
+                      <th>Prescription</th>
+                      {% endif %}
+                    </tr>
+                  </thead>
+                  <tbody>
+
+                    {% for appointment in appointments %}
+                    {% if user.department.name == "Doctor" %}
+                    {% if appointment.status != '0' %}
+                    <tr>
+                      <td> {{ appointment.patient }} </td>
+                      <td> {{ appointment.doctor }} </td>
+                      <td> {{ appointment.appointment_date }} </td>
+                      <td>
+
+                        {% if appointment.status == '0' %}
+                            <span class="badge bg-warning">Pending (Not Paid)</span>
+                        {% elif appointment.status == '1' %}
+                            <span class="badge bg-info">Available</span>
+                        {% elif appointment.status == '2' %}
+                            <span class="badge bg-success">Seen</span>
+                        {% endif %}
+                      </td>
+                      <td>
+                        
+                        {% if appointment.status == '1' or appointment.status == '2'  %}
+                          {% with has_vitalsigns=appointment.vitalsigns.exists %}
+                              {% if has_vitalsigns %}
+                                  <a class="text-primary ml-8" href="{% url 'add_vital' appointment.id %}" ><i class="w-18" data-feather="eye"></i></a>
+                              {% else %}
+                                  <a class="text-primary ml-8" href="{% url 'add_vital' appointment.id %}" ><i class="w-18" data-feather="edit"></i></a>
+                              {% endif %}
+                          {% endwith %}
+                        {% else %}
+                        <a class="text-primary ml-8" href="{% url 'add_vital' appointment.id %}" ><i class="w-18" data-feather="edit"></i></a>
+                      {% endif %}
+                      </td>
+
+                      {% if user.department.name == "Doctor" %}
+                      <td>
+                        <a class="text-primary ml-8" href="{% url 'add_prescription' appointment.patient.id  appointment.id %}" ><i class="w-18" data-feather="edit"></i></a>
+                      </td>
+                      {% endif %}
+
+                    </tr>
+                    {% endif %}
+                    {% elif user.department.name == "Nursing" %}
+                    <tr>
+                      <td> {{ appointment.patient }} </td>
+                      <td> {{ appointment.doctor }} </td>
+                      <td> {{ appointment.appointment_date }} </td>
+                      <td>
+
+                        {% if appointment.status == '0' %}
+                            <span class="badge bg-warning">Pending (Not Paid)</span>
+                        {% elif appointment.status == '1' %}
+                            <span class="badge bg-info">Available</span>
+                        {% elif appointment.status == '2' %}
+                            <span class="badge bg-success">Seen</span>
+                        {% endif %}
+                      </td>
+                      <td>
+                        
+                        {% if  appointment.status == '1' or appointment.status == '2'  %}
+                          {% with has_vitalsigns=appointment.vitalsigns.exists %}
+                              {% if has_vitalsigns %}
+                                  <a class="text-primary ml-8" href="{% url 'add_vital' appointment.id %}" ><i class="w-18" data-feather="eye"></i></a>
+                              {% else %}
+                                  <a class="text-primary ml-8" href="{% url 'add_vital' appointment.id %}" ><i class="w-18" data-feather="edit"></i></a>
+                              {% endif %}
+                          {% endwith %}
+                        {% else %}
+                        <a class="text-primary ml-8" href="{% url 'add_vital' appointment.id %}" >-</a>
+                      {% endif %}
+                      </td>
+
+                      {% if user.department.name == "Doctor" %}
+                      <td>
+                        <a class="text-primary ml-8" href="{% url 'add_prescription' appointment.patient.id  appointment.id %}" ><i class="w-18" data-feather="edit"></i></a>
+                      </td>
+                      {% endif %}
+
+                    </tr>
+                    {% endif %}
+
+                    {% endfor %}
+                 
+                                     
+                  </tbody>
+                </table>
+              </div>
+              <!-- Doctor Modal Start-->
+              <div class="modal fade" id="adddoctormodal">
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Add New Doctor</h5>
+                    </div>
+                    <div class="modal-body">
+                      <form>
+                        <div class="row">
+                          <div class="form-group col-md-6">
+                            <label class="form-label">Name</label>
+                            <input class="form-control" type="text" placeholder="Enter Doctor Name">
+                          </div>
+                          <div class="form-group col-md-6">
+                            <label class="form-label">Department</label>
+                            <input class="form-control" type="text" required="" placeholder="Department">
+                          </div>
+                          <div class="form-group col-md-6">
+                            <label class="form-label">Specialization</label>
+                            <input class="form-control" type="text" required="" placeholder="Specialization">
+                          </div>
+                          <div class="form-group col-md-6">
+                            <label class="form-label">Degree</label>
+                            <input class="form-control" type="text" required="" placeholder="Degree">
+                          </div>
+                          <div class="form-group col-md-6">
+                            <label class="form-label">Mobile</label>
+                            <input class="form-control" type="text" required="" placeholder="Mobile Number">
+                          </div>
+                          <div class="form-group col-md-6">
+                            <label class="form-label">Email</label>
+                            <input class="form-control" type="text" required="" placeholder="Email Id">
+                          </div>
+                          <div class="form-group col-md-6">
+                            <div class="form-label">Joining Date                                     </div>
+                            <input class="datepicker-here form-control" type="text" placeholder="DD/MM/YYYY" data-date-format="dd/mm/yyyy" data-language="en">
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                    <div class="modal-footer">
+                      <button class="btn btn-primary" type="button">Save</button>
+                      <button class="btn btn-danger" type="button" data-bs-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Doctor Modal Start-->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+{% endblock 'content' %}
+ 

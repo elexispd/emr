@@ -1,0 +1,75 @@
+﻿
+{% extends "main.html" %}
+
+{% load static %}
+
+{% block 'content' %}
+      <!-- theme body start-->
+      <div class="theme-body">       
+        <div class="container-fluid">      
+          <div class="row">
+            <div class="col-12">
+              <div class="card">  
+                <div class="card-body"> 
+                
+                  <table class="payment-tbl table">
+                    <thead>
+                      <tr>
+                        <th>Bill No</th>
+                        <th>Patient Name</th>
+                        <th>Doctor Name</th>
+                        <th>Bill Date</th>
+                        <th>Payment Method</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                        <th>Amount</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>01</td>
+                        <td>Ashton Cox</td>
+                        <td>Dr. Anna Mull</td>
+                        <td>28/12/2022</td>
+                        <td>Cash</td>
+                        <td>12th Feb, 2023</td>
+                        <td> <span class="badge badge-success">Paid</span></td>
+                        <td>$150</td>
+                        <td>
+                          <a href="edit-patient.html"><i class="w-18" data-feather="edit"></i></a>
+                          <a class="text-danger ml-8" ><i class="w-18" data-feather="eye"></i></a>
+                          <a class="text-danger ml-8"><i class="w-18" data-feather="trash-2"></i></a>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>02</td>
+                        <td>Brielle Williamson</td>
+                        <td>Dr. Hal Appeno</td>
+                        <td>25/10/2022</td>
+                        <td>Cheque</td>
+                        <td>12th Feb, 2023</td>
+                        <td> <span class="badge badge-warning">Pending</span></td>
+                        <td>$200</td>
+                        <td> 
+                          <a href="edit-patient.html"><i class="w-18" data-feather="edit"></i></a>
+                          <a class="text-danger ml-8" ><i class="w-18" data-feather="eye"></i></a>
+                          <a class="text-danger ml-8" href="javascript:void(0);"><i class="w-18" data-feather="trash-2"></i>
+                          </a>
+                          
+                        </td>
+                      </tr>
+                      
+                    </tbody>
+                  </table>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+{% endblock 'content' %}
+    

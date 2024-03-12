@@ -1,0 +1,42 @@
+
+{% extends "main.html" %}
+
+{% load static %}
+
+{% comment %} Check for super admin later {% endcomment %}
+{% block 'content' %}
+      <div class="theme-body common-dash" data-simplebar="">
+        <div class="container-fluid">
+          <div class="row">        
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header">
+                  <h4 class="text-muted" >Add Income Streams Departments</h4>
+                </div>
+                <div class="card-body"> 
+                  {% if messages %}
+                    {% include "alert.html" %}
+                  {% endif %}
+                    <div class="row">
+                      <div class="form-group col-md-6 mx-auto">
+                        <form  method="POST" action="{% url 'create_income_stream' %}">
+                          {% csrf_token %}
+                          <div class="form-label">Stream</div>
+                          <input type="text" class="form-control" name="stream">
+                          <div class="form-group col-md-4 pt-5 mx-auto" style="margin-top: 22px;">
+                            <button class="btn btn-sm btn-primary mt-5" name="search" type="submit" href="admin-patient-view.html">Add</button>
+                          </div>
+                        </form>
+                      </div>
+    
+                    
+                    </div>
+   
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+{% endblock 'content' %}
+  

@@ -1,0 +1,50 @@
+
+{% extends "main.html" %}
+
+{% load static %}
+{% load custom_filters %}
+
+{% block 'content' %}
+  <!-- theme body start-->
+      <div class="theme-body codex-chat">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-12">
+              <div class="card">  
+                <div class="card-header">
+                  <h4 class="text-muted" > {{ caption }} Income </h4>
+                </div>
+                <div class="card-body">
+                  <table class="doctorslist-tbl table" id="doctorslist-tbl" style="width:100%;">
+                    <thead>
+                      <tr>
+                        <th>S/N</th>
+                        <th>Reference Code</th>
+                        <th>Date</th>                                        
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        {% for record in records %}
+                          <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ record.ref_code }}</td>
+                            <td>{{ record.created_at }}</td>
+                            <td>
+                              <a href="{% url "view_income_stream_from_range" %}?ref_code={{ record.ref_code|encrypt_data }}">
+                                <i class="fa fa-eye"></i>
+                              </a>
+                            </td>
+                          </tr>
+                        {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
+               
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+{% endblock 'content' %}

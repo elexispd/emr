@@ -1,0 +1,92 @@
+﻿
+
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags-->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="">
+    <meta name="keywords" content="admin template, html 5 admin template , medixo admin , dashboard template, bootstrap 5 admin template, responsive admin template">
+    <title>LOGIN - ST. CHARLES BOOROMEO SPECIALIST HOSPITAL </title>
+    <!-- shortcut icon-->
+    <link rel="shortcut icon" href="{% static 'images/logo/icon-logo.png' %}" type="image/x-icon">
+    <!-- Fonts css-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="../../../css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap" rel="stylesheet">
+    <!-- Font awesome -->
+    <link href="{% static 'css/vendor/font-awesome.css' %}" rel="stylesheet">
+    <link href="{% static 'css/vendor/themify-icons.css' %}" rel="stylesheet">
+    <link href="{% static 'css/vendor/icoicon.css' %}" rel="stylesheet">
+    <!-- Scrollbar-->
+    <link href="{% static 'css/vendor/simplebar.css' %}" rel="stylesheet">
+    <!-- Bootstrap css-->
+    <link href="{% static 'css/vendor/bootstrap.css' %}" rel="stylesheet">
+    <!-- Custom css-->
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+  </head>
+  <body>  
+    <!-- Login Start-->
+    <div class="auth-main">
+      <div class="codex-authbox">
+        <div class="auth-header">
+          <div class="codex-brand">
+            <a href="index.html"><img class="img-fluid light-logo" src="{% static 'images/logo/logo.png' %}" alt=""></a></div>
+            <h3 class="text-muted">Welcome Back</h3>
+        </div>
+        <form action="" method="POST">
+          {% csrf_token %}
+          {% if form.errors %}
+            <p class="text-danger text-center">Invalid Login Details</p>
+          {% endif %}
+          <div class="form-group">
+            <label class="form-label">Username</label>
+            {% comment %} <input class="form-control" type="text" required="" placeholder="Enter Your Email"> {% endcomment %}
+            {{ form.username }}
+            
+          </div>
+          <div class="form-group">
+            <label class="form-label">Password</label>
+            <div class="input-group group-input">
+              {% comment %} <input class="form-control showhide-password" type="password" placeholder="Enter Your Password" required=""><span class="input-group-text toggle-show fa fa-eye"></span> {% endcomment %}
+              {{ form.password }}
+              {% if form.errors.username %}
+                  <p class="text-danger">{{ form.errors.password }}</p>
+              {% endif %}
+
+            </div>
+          </div>
+         
+          <div class="form-group">
+            <button class="btn btn-primary" type="submit"><i class="fa fa-sign-in"></i> Login</button>
+          </div>
+
+        </form>
+
+        <div class="text-center text-danger">
+          &copy; Powered By Premium ESOWP LTD.
+        </div>
+
+      </div>
+    </div>
+    <!-- Login End-->
+      <!-- main jquery-->
+      <script src="{% static 'js/jquery-3.7.0.min.js' %}"></script>
+      <!-- Feather iocns js-->
+      <script src="{% static 'js/icons/feather-icon/feather.js' %}"></script>
+      <!-- Bootstrap js-->
+      <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+      <script src="{% static 'js/vendors/notify/bootstrap-notify.js' %}"></script>
+      <script src="{% static 'js/vendors/notify/bootstrap-customnotify.js' %}"></script>
+      <!-- customizer-->
+      <script src="{% static 'js/customizer.js' %}"></script>
+      <!-- Scrollbar-->
+      <script src="{% static 'js/vendors/simplebar.js' %}"></script>
+      <!-- Custom script-->
+      <script src="{% static 'js/custom-script.js' %}"></script>
+  </body>
+</html>

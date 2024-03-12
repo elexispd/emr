@@ -1,0 +1,44 @@
+
+{% extends "main.html" %}
+
+{% load static %}
+
+{% comment %} Check for super admin later {% endcomment %}
+{% block 'content' %}
+      <div class="theme-body common-dash" data-simplebar="">
+        <div class="container-fluid">
+          <div class="row">        
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header">
+                  <h4 class="text-muted" >Record Today's Income</h4>
+                </div>
+                <div class="card-body"> 
+                  {% if messages %}
+                    {% include "alert.html" %}
+                  {% endif %}
+        
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="row">
+                            {% for stream in streams %}
+                            <div class="form-group col-md-3 mx-auto">                     
+                               <label for="{{ stream.id }}">{{ stream.name }}</label>
+                                <input type="number" id="{{ stream.name }}" name="{{ stream.id }}" class="form-control">      
+                            </div> 
+                            {% endfor %}
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                      
+   
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+{% endblock 'content' %}
+  
+medicine    |    Surgery   |  Dental
+(input here)  (input here)   (input here)

@@ -1,0 +1,195 @@
+{% extends "main.html" %}
+
+{% load static %}
+
+{% block 'content' %}
+    <div class="theme-body common-dash" data-simplebar="">
+      <div class="container-fluid">
+        <div class="row">        
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-header">
+                <h4>Register Patient</h4>
+              </div>
+              <div class="card-body"> 
+
+
+                
+               
+                <form method="post">
+                  {% csrf_token %}
+
+                 
+                  <div class="row">
+                   
+                    <div class="form-group col-md-4">
+                      <div class="form-label">First Name</div>
+                      {{ form.first_name }}
+                      {% for error in form.first_name.errors %}
+                            <span class="text-danger">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+
+                    <div class="form-group col-md-4">
+                      <div class="form-label">Last Name</div>
+                      {{ form.last_name }}
+                      {% for error in form.last_name.errors %}
+                            <span class="text-danger">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+
+                    <div class="form-group col-md-4">
+                      <div class="form-label">Phone Number</div>
+                      {{ form.phone_number }}
+                      {% for error in form.phone_number.errors %}
+                            <span class="text-danger">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+
+                    <div class="form-group col-md-4">
+                      <div class="form-label">Gender</div>
+                      {{ form.gender }}
+                      {% for error in form.gender.errors %}
+                            <span class="text-danger">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+
+                    <div class="form-group col-md-4">
+                      <div class="form-label">Card Number</div>
+                      <select name="card_number" id=""  class="form-control" readonly>
+                        <option value="{{ card.id }}" selected > {{ card }}</option>
+                      </select>
+                      {% for error in form.card_number.errors %}
+                            <span class="text-danger">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+
+                    <div class="form-group col-md-4">
+                      <div class="form-label">Patient Type</div>
+                      {{ form.patient_type }}
+                      {% for error in form.patient_type.errors %}
+                            <span class="text-danger">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+
+                    <div class="form-group col-md-4">
+                      <div class="form-label">Assign Doctor</div>
+                      <select name="doctor" class="form-control" id="">
+                        <option value="" selected disabled></option>
+                        {% for doctor in doctors %}
+                            <option value="{{ doctor.id }}">{{ doctor }} - {{ doctor.doctor_specialization|upper }}</option>
+                        {% endfor %}    
+                        </option>
+                        
+                      </select>
+                      {% for error in form.doctor.errors %}
+                            <span class="text-danger">{{ error }}</span>
+                        {% endfor %} 
+                    </div>
+
+                
+                    <div class="form-group col-md-4">
+                      <div class="form-label">Date Of Birth</div>
+                        {{ form.dob }}
+                        {% for error in form.dob.errors %}
+                            <span class="text-danger">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+
+                    <div class="form-group col-md-4">
+                      <div class="form-label">Place Of Origin</div>
+                        {{ form.place_of_origin }}
+                        {% for error in form.place_of_origin.errors %}
+                            <span class="text-danger">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+
+                    <div class="form-group col-md-4">
+                      <div class="form-label">Marriage Status</div>
+                        {{ form.marriage_status }}
+                        {% for error in form.marriage_status.errors %}
+                            <span class="text-danger">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+
+                    <div class="form-group col-md-4">
+                      <div class="form-label">Occupation</div>
+                      {{ form.occupation }}
+                      {% for error in form.occupation.errors %}
+                            <span class="text-danger">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <div class="form-label">Religion</div>
+                        {{ form.religion }}
+                        {% for error in form.religion.errors %}
+                            <span class="text-danger">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+
+
+                    <div class="form-group col-md-4">
+                        <div class="form-label">Ethnic Group</div>
+                        {{ form.ethnic_group }}
+                        {% for error in form.ethnic_group.errors %}
+                            <span class="text-danger">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+
+                    <div class="form-group col-md-4">
+                      <div class="form-label">Next Of Kin</div>
+                      {{ form.next_of_kin }}
+                      {% for error in form.next_of_kin.errors %}
+                          <span class="text-danger">{{ error }}</span>
+                      {% endfor %}
+                    </div>
+
+                    
+                    <div class="form-group col-md-4">
+                      <div class="form-label">Address Next Of Kin</div>
+                      {{ form.address_of_kin }}
+                      {% for error in form.address_of_kin.errors %}
+                          <span class="text-danger">{{ error }}</span>
+                      {% endfor %}
+                    </div>
+
+                    <div class="form-group col-md-4">
+                      <div class="form-label">Next Of Kin Phone Number</div>
+                      {{ form.next_of_kin_phone }}
+                      {% for error in form.next_of_kin_phone.errors %}
+                          <span class="text-danger">{{ error }}</span>
+                      {% endfor %}
+                    </div>
+
+
+
+                    <div class="form-group text-end mb-0"> 
+                      <button type="submit" class="btn btn-sm btn-primary" >Submit</button>
+                    </div>
+                  </div>
+
+                  {% if form.errors %}
+                    <div class="alert alert-danger">
+                        <ul>
+                            {% for field, errors in form.errors.items %}
+                            {% for error in errors %}
+                            <li>{{ field|title }}: {{ error }}</li>
+                            {% endfor %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+                  
+                </form>
+
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {% endblock 'content' %}
+    

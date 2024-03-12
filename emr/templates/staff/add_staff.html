@@ -1,0 +1,144 @@
+﻿{% extends "main.html" %}
+
+{% load static %}
+
+{% block 'content' %}
+    <div class="theme-body common-dash" data-simplebar="">
+      <div class="container-fluid">
+        <div class="row">        
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-header">
+                <h4>Add Staff</h4>
+              </div>
+              <div class="card-body"> 
+
+                {% if messages %}
+                 {% include "alert.html" %}
+                {% endif %}
+               
+                <form method="post">
+                  {% csrf_token %}
+
+                 
+                  <div class="row">
+                   
+                    <div class="form-group col-md-4">
+                      <div class="form-label">First Name</div>
+                      {{ form.first_name }}
+                      {% for error in form.first_name.errors %}
+                            <span class="text-danger">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+
+                    <div class="form-group col-md-4">
+                      <div class="form-label">Last Name</div>
+                      {{ form.last_name }}
+                      {% for error in form.last_name.errors %}
+                            <span class="text-danger">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+
+                    <div class="form-group col-md-4">
+                      <div class="form-label">Email</div>
+                      {{ form.email }}
+                    </div>
+
+                    <div class="form-group col-md-4">
+                      <div class="form-label">Phone Number</div>
+                      {{ form.phone_number }}
+                      {% for error in form.phone_number.errors %}
+                            <span class="text-danger">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+
+                    <div class="form-group col-md-4">
+                      <div class="form-label">Department</div>
+                      {{ form.department }}
+                      {% for error in form.department.errors %}
+                            <span class="text-danger">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+
+                    <div class="form-group col-md-4 d-none" id="type-none">
+                      <div class="form-label">Doctor Type</div>
+                      <select name="doctor_type" class="form-control" id="">
+                        <option value="" disabled selected>-------------</option>
+                        <option value="contract">Contract</option>
+                        <option value="permanent">Permanent</option>
+                      </select>
+                    </div>
+
+                    
+                    <div class="form-group col-md-4 d-none" id="spec-div" >
+                      <div class="form-label">Doctor Specialization</div>
+                      <select name="doctor_specialization" class="form-control" id="">
+                        <option value="" disabled selected>-------------</option>
+                        <option value="general">General</option>
+                        <option value="surgeon">Surgeon</option>                        
+                      </select>
+                    </div>
+
+                    <div class="form-group col-md-4 d-none" id="chief-div">
+                      <div class="form-label">Chief Consultant</div>
+                      {{ form.is_chief_consultant }}
+                    </div>
+
+
+                    <div class="form-group col-md-4 d-none" id="store-div">
+                      <div class="form-label">Store Keeper</div>
+                      {{ form.is_store_keeper }}
+                    </div>
+
+                    <div class="form-group col-md-4">
+                      <div class="form-label">HOD</div>
+                      {{ form.is_hod }}
+                    </div>
+
+
+
+                    <div class="form-group text-end mb-0"> 
+                      <button type="submit" class="btn btn-sm btn-primary" >Submit</button>
+                    </div>
+                  </div>
+                  
+                </form>
+
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      $("#id_department").change(function() {
+        var dept = $(this).find(":selected").text();
+        if(dept == "Doctor") {
+            $('#type-div').removeClass('d-none')
+            $('#spec-div').removeClass('d-none')
+            $('#chief-div').removeClass('d-none')
+            $('#store-div').addClass('d-none');
+        }
+        
+        if(dept == "Pharmacy") {
+          $('#store-div').removeClass('d-none')
+          $('#type-div').addClass('d-none')
+          $('#spec-div').addClass('d-none')
+          $('#chief-div').addClass('d-none')
+
+        } 
+        
+        if(dept != "Pharmacy" && dept != "Doctor"){
+          $('#type-div').addClass('d-none')
+          $('#spec-div').addClass('d-none')
+          $('#chief-div').addClass('d-none')
+          $('#store-div').addClass('d-none');
+          
+        }
+      })
+    </script>
+
+    {% endblock 'content' %}
+    

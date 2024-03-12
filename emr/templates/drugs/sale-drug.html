@@ -1,0 +1,134 @@
+﻿
+
+{% extends "main.html" %}
+
+{% load static %}
+
+{% block 'content' %}
+
+
+      <div class="theme-body common-dash" data-simplebar="">
+        <div class="container-fluid">
+          <div class="row">        
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header">
+                  <h4>Sale Drug</h4>
+                </div>
+                <div class="card-body"> 
+                  {% if messages %}
+                  <div class="messages">
+                    {% include 'alert.html' %}
+                  </div>
+                {% endif %}
+                <form method="POST">
+                  {% csrf_token %}
+                  <div id="drug-fields">
+                      <div class="drug-field">
+                          <div class="row">
+                              <div class="form-group col-md-4">
+                                  <div class="form-label">Name</div>
+                                  <select class="form-select hidesearch" name="name[]" id="drug_name">
+                                      <option value="">-------------------------Select Drug-------------------------</option>
+                                      {% for drug in drugs %}
+                                      <option value="{{ drug.id }}">{{ drug }} - {{ drug.brand }}</option>
+                                      {% endfor %}
+                                  </select>
+                              </div>
+                              <div class="form-group col-md-4 d-none" id="price_div">
+                                  <div class="form-label">Price</div>
+                                  <input class="form-control" type="text" id="price" value="" disabled>
+                              </div>
+                              <div class="form-group col-md-4 d-none" id="available_div">
+                                  <div class="form-label">Available Quantity</div>
+                                  <input class="form-control" type="text" id="available_qty" value="" disabled>
+                              </div>
+                              <div class="form-group col-md-4">
+                                  <div class="form-label">Quantity</div>
+                                  <input class="form-control" name="quantity[]" id="qty" type="number" value="" placeholder="Quantity...">
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="form-group text-end mb-0">
+                      <button type="button" class="btn btn-sm btn-primary" id="add-more">Add More</button>
+                      <button type="submit" class="btn btn-sm btn-primary">Sale</button>
+                  </div>
+              </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <script>
+        $('#drug_name').change(function(){
+            var drugId = $(this).val();
+            if(drugId == '') {
+              $('#price_div').addClass('d-none')
+              $('#available_div').addClass('d-none')
+            }
+            $.ajax({
+                url: '{% url "get_drug_details" %}',  // Replace with your endpoint to fetch drug details
+                data: {
+                    'drug_id': drugId
+                },
+                dataType: 'json',
+                success: function(data){
+                    $('#price_div').removeClass('d-none')
+                    $('#available_div').removeClass('d-none')
+                    $('#price').val(data.price);
+                    $('#available_qty').val(data.available_quantity);
+                }
+            });
+        });
+    </script>
+
+    <script>
+      $(document).ready(function() {
+        // Function to duplicate the drug fields
+        function duplicateDrugField() {
+            var clone = $('.drug-field').first().clone();
+            // Reset the cloned drug field
+            clone.find('#price_div').addClass('d-none');
+            clone.find('#available_div').addClass('d-none');
+            clone.find('#price').val('');
+            clone.find('#available_qty').val('');
+            clone.find('#qty').val('');
+            $('#drug-fields').append(clone);
+        }
+    
+        // Add event listener to the "Add More" button
+        $('#add-more').click(function() {
+            duplicateDrugField();
+        });
+    });
+    
+    $('#drug-fields').on('change', '.hidesearch', function(){
+        var drugId = $(this).val();
+        var $row = $(this).closest('.drug-field').find('.row');
+        if(drugId == '') {
+            $row.find('#price_div').addClass('d-none');
+            $row.find('#available_div').addClass('d-none');
+        }
+        $.ajax({
+            url: '{% url "get_drug_details" %}',
+            data: {
+                'drug_id': drugId
+            },
+            dataType: 'json',
+            success: function(data){
+                $row.find('#price_div').removeClass('d-none');
+                $row.find('#available_div').removeClass('d-none');
+                $row.find('#price').val(data.price);
+                $row.find('#available_qty').val(data.available_quantity);
+            }
+        });
+    });
+    
+  </script>
+    
+
+
+{% endblock 'content' %}

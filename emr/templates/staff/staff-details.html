@@ -1,0 +1,113 @@
+
+{% extends "main.html" %}
+
+{% load static %}
+{% load custom_filters %}
+
+{% block 'content' %}
+      <div class="theme-body">
+        <div class="container-fluid cdxuser-profile">
+          <div class="row d-flex justify-content-center">
+
+            <div class="col-md-8">
+              <div class="card" style="padding-inline: 20px;">
+                <div class="card-header">
+                  <h4>Staff Data</h4>
+                </div>
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <ul class="contact-list">
+                      <li> <span>Name:</span> {{ staff.first_name }} {{ staff.last_name }} </li>
+                      <li> <span>Department:</span> {{ staff.department }} </li>
+                      <li> <span>Email:</span> {{ staff.email }} </li>
+                      <li> <span>Phone Number:</span> {{ staff.phone_number }} </li>
+                      <li> <span>Username:</span> {{ staff.username }} </li>
+           
+                      {% if staff.department.name == 'Doctor' %} 
+                        <li> <span>Chief Consulatant:</span>{{ staff.is_chief_consultant }}</li>
+                        <li> <span>Type Of Doctor:</span>{{ staff.doctor_type }}</li>
+                        <li> <span>Specialization :</span>{{ staff.doctor_specialization }}</li>
+                      {% endif %}
+
+
+                    {% if staff.department.name == 'Pharmacy' %}
+                      <li> <span>Store Keeper:</span>{{ staff.is_store_keeper }}</li>                     
+                      
+                     {% endif %}
+
+                      <li> <span>Head Of Department :</span>{{ staff.is_hod }}</li>
+                      
+                      {% comment %} <li> <span>Chief Consulatant:</span>{{ staff.doctor.is_chief_consultant }}</li>
+                      <li> <span>Next Of Kin:</span>{{ staff.next_of_kin }}</li>
+                      <li> <span>Address Of Next Of Kin:</span>{{ staff.address_of_kin }}</li>
+                      <li> <span>Phone Number Of Next Of Kin:</span>{{ staff.next_of_kin_phone }}</li> {% endcomment %}
+                      
+                    </ul>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+
+  
+          {% if user.department.name == "Doctor" %}
+          <div class="row d-flex justify-content-center">
+            <div class="col-6 card-foote px-2 py-5 d-flex justify-content-start">
+              <a class="btn btn-primary d-block mx-auto btn-lg disable" href="{% url "prescriptions" user_id=staff.id %}">Prescriptions</a>
+              <a  class="btn btn-primary d-block mx-auto btn-lg"  href="{% url "staff_lab_tests" staff.id %}"> View Lab/Result</a>  
+              <a class="btn btn-primary d-block mx-auto btn-lg" href="{% url "scheduled_appointments" %}?q={{ staff.id }}">Scheduled Appointment</a>            
+            </div>
+          </div>
+          {% endif %}
+
+          {% if user.department.name == "Records" %}
+          <div class="row d-flex justify-content-center">
+            <div class="col-6 card-foote px-2 py-5 d-flex justify-content-start">
+              <a class="btn btn-primary d-block mx-auto btn-lg disable" href="{% url "book_appointment" staff.id %}">Book Appointment</a>
+              <a class="btn btn-primary d-block mx-auto btn-lg" href="{% url "scheduled_appointments" %}?q={{ staff.id }}">Scheduled Appointment</a>
+              <a class="btn btn-primary d-block mx-auto btn-lg" href="{% url "update_staff" staff.id %}">Edit Record</a>
+            </div>
+          </div>
+          {% endif %}
+
+          
+          {% if user.department.name == "Lab" %}
+          <div class="row d-flex justify-content-center">
+            <div class="col-6 card-foote px-2 py-5 d-flex justify-content-start">
+              <a  class="btn btn-primary d-block mx-auto btn-lg disable"  href="{% url "add_lab_test" staff.id %}"> Add Test</a>
+              <a  class="btn btn-primary d-block mx-auto btn-lg"  href="{% url "staff_lab_tests" staff.id %}"> View Test</a>
+              {% comment %} <a  class="btn btn-primary d-block mx-auto btn-lg"  href=""> View Lab Results </a> {% endcomment %}
+            </div>
+          </div>
+          {% endif %}
+
+          
+         
+
+        </div>
+
+
+        
+      </div>
+
+      <script>
+        var is_expired = $('#expired').text();
+        if (is_expired === "Expired") {
+          
+            $('.disable').click(function(event) {
+              event.preventDefault();
+              cuteAlert({
+                type: "error",
+                title: "Expired Card",
+                message: "This staff's card needs to be renewed",
+                buttonText: "OK"
+              })
+            });
+        }
+    </script>
+    
+
+
+{% endblock 'content' %}

@@ -1,0 +1,65 @@
+
+{% extends "main.html" %}
+
+{% load static %}
+
+{% block 'content' %}
+      <!-- theme body start-->
+      <div class="theme-body">       
+        <div class="container-fluid">      
+          <div class="row">
+            <div class="col-12">
+              <div class="card">  
+                <div class="card-body"> 
+                
+                  <table class="payment-tbl table">
+                    <thead>
+                      <tr>
+                        <th>S/N</th>
+                        <th>Patient Name</th>
+                        <th>Test</th>                   
+                        <th>Amount</th>                   
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    
+                       {% for payment in payments %}
+                      
+                      <tr>
+                          <td>{{ forloop.counter }}</td>
+                          <td>{{ payment.service_id.patient }} </td> 
+                          <td>{{ payment.service_id.labprice }}</td>  
+                          <td> <strike>N</strike>{{ payment.service_id.labprice.price }}</td>  
+                          <td>
+                            {% if payment.payment_status %}
+                            <a href="{% url "invoice" payment.id %}"><i class="w-18" data-feather="eye"></i></a>  
+                            {% else  %}
+                            {% comment %} <form method="post" action="{{ confirm_appointment_payment }}">
+                              {% csrf_token %}
+                              <input type="hidden"value="{{ payment.id }}" name="payment_id" >
+                              <input type="hidden"value="{{ payment.service_id.patient.id }}" name="patient_id" >
+                              <button type="submit" style="background:none; outline:none; border: none;" name="redirect_to_confirm">fkjsdfj<i class="w-18 text-info" data-feather="edit"></i></button>
+                             
+                            </form>  {% endcomment %}
+                            <a href="{% url "confirm_appointment_payment"  payment.id  %}"><i class="w-18" data-feather="edit"></i></a>  
+                            {% endif %} 
+                      
+                          </td>
+                      </tr>
+                      {% endfor %}
+                      
+                      
+                    </tbody>
+                  </table>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+{% endblock 'content' %}
+    

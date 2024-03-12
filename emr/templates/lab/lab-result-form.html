@@ -1,0 +1,476 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags-->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="">
+    <meta name="keywords" content="admin template, html 5 admin template , medixo admin , dashboard template, bootstrap 5 admin template, responsive admin template">
+    <title>Medixo - Medical & Hospital Admin Template</title>
+    <!-- shortcut icon-->
+    <link rel="shortcut icon" href="../assets/images/logo/icon-logo.png" type="image/x-icon">
+    <!-- Fonts css-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="../../../css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap" rel="stylesheet">
+    <!-- Font awesome -->
+    <link href="../assets/css/vendor/font-awesome.css" rel="stylesheet">
+    <link href="../assets/css/vendor/themify-icons.css" rel="stylesheet">
+    <link href="../assets/css/vendor/icoicon.css" rel="stylesheet">
+    <!-- datepicker-->
+    <link href="../assets/css/vendor/datepicker/datepicker.css" rel="stylesheet">
+    <!-- select 2 css-->
+    <link href="../assets/css/vendor/select2/select2.min.css" rel="stylesheet">
+    <!-- Scrollbar-->
+    <link href="../assets/css/vendor/simplebar.css" rel="stylesheet">
+    <!-- Bootstrap css-->
+    <link href="../assets/css/vendor/bootstrap.css" rel="stylesheet">
+    <!-- Custom css-->
+    <link href="../assets/css/style.css" rel="stylesheet">
+  </head>
+  <body>
+      <!-- Loader Start-->
+        <div class="codex-loader">
+          <div class="loader-item">
+            <svg class="spinner-pulse" version="1.2" height="210" width="550" xmlns="http://www.w3.org/2000/svg" viewport="0 0 60 60" xmlns:xlink="http://www.w3.org/1999/xlink">
+              <path class="spinnersub-pulse" fill="none" stroke-width="3" stroke-linejoin="round" d="M0,90L250,90Q257,60 262,87T267,95 270,88 273,92t6,35 7,-60T290,127 297,107s2,-11 10,-10 1,1 8,-10T319,95c6,4 8,-6 10,-17s2,10 9,11h210"></path>
+            </svg>
+          </div>
+        </div>
+      <!-- Loader End-->
+      <!-- Header Start-->
+      <header class="codex-header">
+        <div class="flex-between">
+          <div class="header-left d-flex align-items-center">
+            <div class="sidebar-action navicon-wrap"><i data-feather="menu"></i></div>
+            <div class="navsearch-bar">
+              <div class="input-group">
+                <input class="form-control" type="text" value="" placeholder="Search Here....."><span class="input-group-text"><i data-feather="search"></i></span>
+              </div>
+            </div>
+          </div>
+          <div class="header-right">
+            <ul class="nav-iconlist">
+              <li>
+                <div class="navicon-wrap btn-windowfull"><i data-feather="maximize"></i></div>
+              </li>
+              <li>
+                <div class="action-toggle navicon-wrap"><i data-feather="bell"></i>
+                  <div class="noti-count"></div>
+                </div>
+                <div class="hover-dropdown navnotification-drop">
+                  <div class="drop-header">
+                    <h6>notification<span>05           </span></h6>
+                  </div>
+                  <ul class="scroll-primary" data-simplebar="">
+                    <li>
+                      <div class="media">
+                        <div class="badgeavtar bg-success">A</div>
+                        <div class="media-body ml-10">
+                          <h6>Successful Paid Invoice #1579</h6><span class="text-light">20 mins ago</span>
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="media">
+                        <div class="badgeavtar bg-warning"> <i class="fa fa-clock-o"></i></div>
+                        <div class="media-body ml-10">
+                          <h6>Confirmed Dr Aleni Joshep visit</h6><span class="text-light">2 hours ago</span>
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="media">
+                        <div class="badgeavtar bg-info"> <i class="fa fa-times"></i></div>
+                        <div class="media-body ml-10">
+                          <h6>Cancel Appointment at 5:00 PM</h6><span class="text-light">2 hours ago</span>
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="media">
+                        <div class="badgeavtar bg-success">A</div>
+                        <div class="media-body ml-10">
+                          <h6>Successful Paid Invoice #1215</h6><span class="text-light">3 hours ago</span>
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="media">
+                        <div class="badgeavtar bg-secondary"><i class="fa fa-check"></i></div>
+                        <div class="media-body ml-10">
+                          <h6>Great Speed Notify of 2.5 LTC</h6><span class="text-light">4 hours ago</span>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                  <div class="drop-footer"><a href="javascript:void(0)">See All Notification</a></div>
+                </div>
+              </li>
+              <li>
+                <div class="navicon-wrap"><i data-feather="mail"></i>
+                  <div class="noti-count"></div>
+                </div>
+                <div class="hover-dropdown navmail-drop">
+                  <div class="drop-header">
+                    <h6>Mail<span>08           </span></h6>
+                  </div>
+                  <ul class="scroll-primary" data-simplebar="">
+                    <li>
+                      <div class="media">
+                        <div class="avtar-wrap"><img class="img-fluid" src="../assets/images/avtar/2.jpg" alt=""></div>
+                        <div class="media-body ml-10">
+                          <h6>Anna Mull<span class="text-light ml-10 fs-10">- 20 mins ago</span></h6><span class="text-light">Successful Paid Invoice #1579</span>
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="media">
+                        <div class="avtar-wrap"><img class="img-fluid" src="../assets/images/avtar/3.jpg" alt=""></div>
+                        <div class="media-body ml-10">
+                          <h6>Hal Appeno<span class="text-light ml-10 fs-10">- 30 mins ago</span></h6><span class="text-light">Successful Paid Invoice #1579</span>
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="media">
+                        <div class="avtar-wrap"><img class="img-fluid" src="../assets/images/avtar/4.jpg" alt=""></div>
+                        <div class="media-body ml-10">
+                          <h6>Paul Molive<span class="text-light ml-10 fs-10">- 45 mins ago</span></h6><span class="text-light">Successful Paid Invoice #1579</span>
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="media">
+                        <div class="avtar-wrap"><img class="img-fluid" src="../assets/images/avtar/5.jpg" alt=""></div>
+                        <div class="media-body ml-10">
+                          <h6>Saul T. Balls<span class="text-light ml-10 fs-10">- 50 mins ago</span></h6><span class="text-light">Successful Paid Invoice #1579</span>
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="media">
+                        <div class="avtar-wrap"><img class="img-fluid" src="../assets/images/avtar/6.jpg" alt=""></div>
+                        <div class="media-body ml-10">
+                          <h6>Anna Mull<span class="text-light ml-10 fs-10">- 1 hour ago</span></h6><span class="text-light">Successful Paid Invoice #1579</span>
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="media">
+                        <div class="avtar-wrap"><img class="img-fluid" src="../assets/images/avtar/7.jpg" alt=""></div>
+                        <div class="media-body ml-10">
+                          <h6>William Stephin<span class="text-light ml-10 fs-10">- 2 hour ago</span></h6><span class="text-light">Successful Paid Invoice #1579</span>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                  <div class="drop-footer"><a href="javascript:void(0)">See All Messages</a></div>
+                </div>
+              </li>
+              <li class="nav-profile"><a class="action-toggle" href="javascript:void(0)">
+                  <div class="media">
+                    <div class="user-icon"><img class="img-fluid rounded-50" src="../assets/images/avtar/admin.jpg" alt="logo"></div>
+                  </div></a>
+                <div class="hover-dropdown navprofile-drop">
+                  <ul>
+                    <li><a href="support.html"><i class="ti-help-alt"></i>help</a></li>
+                    <li><a href="javascript:void(0)"> <i class="ti-settings"></i>setting</a></li>
+                    <li><a href="login.html"><i class="fa fa-sign-out"></i>log out</a></li>
+                  </ul>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <!-- sidebar start-->
+      <div class="codex-sidebar">
+        <div class="logo-gridwrap"><a class="lightlogo" href="index.html"><img class="img-fluid" src="../assets/images/logo/logo.png" alt="sidebar-lightlogo"></a>
+          <div class="sidebar-action"><i data-feather="menu"></i></div>
+        </div>
+        <div class="icon-logo"><a class="lightlogo" href="index.html"><img class="img-fluid" src="../assets/images/logo/icon-logo.png" alt="sidebar-lightlogo"></a></div>
+        <ul class="codex-menu custom-scroll mb-0 one" data-simplebar="">
+          <li class="cdxmenu-title">
+            <h5 class="d-flex justify-content-between toggle-dropdown">Admin<i class="fa fa-angle-down"></i></h5>
+            <ul class="submenu-list">
+              <li class="menu-item"><a href="javascript:void(0);">
+                <div class="icon-item"><i class="icofont-home"></i></div><span>Staff</span><i class="fa fa-angle-down"></i></a>
+                <ul class="submenu-list">
+                  <li><a href="search-general.html">View staff</a></li>
+                  <li><a href="add_staff.html">Add staff</a></li>
+                </ul>
+              </li>
+              <li class="menu-item"><a href="javascript:void(0);">
+                  <div class="icon-item"><i class="icofont-doctor-alt"></i></div><span>Patients</span><i class="fa fa-angle-down"></i></a>
+                <ul class="submenu-list">
+                  <li><a href="admin-patient-view.html">view</a></li>
+                </ul>
+              </li>
+              <li class="menu-item"><a href="javascript:void(0);">
+                  <div class="icon-item"><i class="icofont-paralysis-disability"></i></div><span>Password</span><i class="fa fa-angle-down"></i></a>
+                <ul class="submenu-list">
+                  <li><a href="new-password.html">Change password</a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <ul class="codex-menu custom-scroll mb-0" data-simplebar="">
+          <li class="cdxmenu-title">
+            <h5 class="d-flex justify-content-between toggle-dropdown">Records<i class="fa fa-angle-down"></i></h5>
+            <ul class="submenu-list">
+              <li class="menu-item"><a href="javascript:void(0);">
+                <div class="icon-item"><i class="icofont-home"></i></div><span>Patient </span><i class="fa fa-angle-down"></i></a>
+                <ul class="submenu-list">
+                  <li><a href="records-patient-view.html">view</a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <ul class="codex-menu custom-scroll mb-0" data-simplebar="">
+          <li class="cdxmenu-title">
+            <h5 class="d-flex justify-content-between toggle-dropdown">Nursing<i class="fa fa-angle-down"></i></h5>
+            <ul class="submenu-list">
+              <li class="menu-item"><a href="javascript:void(0);">
+                <div class="icon-item"><i class="icofont-home"></i></div><span>Patient </span><i class="fa fa-angle-down"></i></a>
+                <ul class="submenu-list">
+                  <li><a href="nursing-patient-view.html">view</a></li>
+                  <li><a href="prescription.html">Take Vitals</a></li>
+                  <li><a href="nursing-appointment-view.html">view appointment</a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <ul class="codex-menu custom-scroll mb-0" data-simplebar="">
+          <li class="cdxmenu-title">
+            <h5 class="d-flex justify-content-between toggle-dropdown">Billing<i class="fa fa-angle-down"></i></h5>
+            <ul class="submenu-list">
+              <li class="menu-item"><a href="javascript:void(0);">
+                <div class="icon-item"><i class="icofont-home"></i></div><span>Patient </span><i class="fa fa-angle-down"></i></a>
+                <ul class="submenu-list">
+                  <li><a href="billing-patient-view.html">view</a></li>
+                  <li><a href="payment.html">Payment</a></li>
+                  <li><a href="patient-invoice.html">History</a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <ul class="codex-menu custom-scroll mb-0" data-simplebar="">
+          <li class="cdxmenu-title">
+            <h5 class="d-flex justify-content-between toggle-dropdown">Lab<i class="fa fa-angle-down"></i></h5>
+            <ul class="submenu-list">
+              <li class="menu-item"><a href="javascript:void(0);">
+                <div class="icon-item"><i class="icofont-home"></i></div><span>Patient</span><i class="fa fa-angle-down"></i></a>
+                <ul class="submenu-list">
+                  <li><a href="lab-patient-view.html">view</a></li>
+                  <li><a href="lab-test-form.html">add lab test</a></li>
+                  <li><a href="lab-result-form.html">Upload Result</a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <ul class="codex-menu custom-scroll mb-0" data-simplebar="">
+          <li class="cdxmenu-title">
+            <h5 class="d-flex justify-content-between toggle-dropdown">Doctor<i class="fa fa-angle-down"></i></h5>
+            <ul class="submenu-list">
+              <li class="menu-item"><a href="javascript:void(0);">
+                  <div class="icon-item"><i class="icofont-paralysis-disability"></i></div><span>Patient</span><i class="fa fa-angle-down"></i></a>
+                <ul class="submenu-list">
+                  <li><a href="doc-patient-view.html">View patients</a></li>
+                  <li><a href="doc-appointment-view.html">View appointments</a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <ul class="codex-menu custom-scroll mb-0" data-simplebar="">
+          <li class="cdxmenu-title">
+            <h5 class="d-flex justify-content-between toggle-dropdown">Pharmacy<i class="fa fa-angle-down"></i></h5>
+            <ul class="submenu-list">
+              <li class="menu-item"><a href="javascript:void(0);">
+                <div class="icon-item"><i class="icofont-home"></i></div><span>Drugs</span><i class="fa fa-angle-down"></i></a>
+                <ul class="submenu-list">
+                  <li><a href="add-drugs.html">Add drugs</a></li>
+                  <li><a href="sale-drugs.html">Sale drugs</a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <!-- sidebar end-->
+      <!-- Header End-->
+    <div class="themebody-wrap">
+      <!-- theme body start-->
+      <div class="theme-body common-dash" data-simplebar="">
+        <div class="container-fluid">
+          <div class="row">        
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header">
+                  <h4>Edit Appointment</h4>
+                </div>
+                <div class="card-body"> 
+                  <form>
+                    <div class="row">
+                      <div class="form-group col-md-4">
+                        <div class="form-label">Title               </div>
+                        <select class="form-select hidesearch" name="patienttitle[]">
+                          <option value="patientitle">Title</option>
+                          <option value="Miss">Miss</option>
+                          <option value="Mr." selected="">Mr.</option>
+                          <option value="Mrs.">Mrs.</option>
+                        </select>
+                      </div>
+                      <div class="form-group col-md-4">
+                        <div class="form-label">First Name             </div>
+                        <input class="form-control" type="text" value="Sarah" placeholder="First Name">
+                      </div>
+                      <div class="form-group col-md-4">
+                        <div class="form-label">last name             </div>
+                        <input class="form-control" type="text" value="Smith" placeholder="Last Name">
+                      </div>
+                      <div class="form-group col-md-4">
+                        <div class="form-label">Date of Birth                                     </div>
+                        <input class="datepicker-here form-control" type="text" value="10/12/1999" data-date-format="dd/mm/yyyy" data-language="en">
+                      </div>
+                      <div class="form-group col-md-4">
+                        <div class="form-label">Gender</div>
+                        <select class="form-select">
+                          <option value="Gender">Select Gender</option>
+                          <option value="Male">Male</option>
+                          <option value="Female" selected="">Female</option>
+                        </select>
+                      </div>
+                      <div class="form-group col-md-4">
+                        <div class="form-label">Department Name               </div>
+                        <select class="form-select hidesearch" name="Department[]">
+                          <option value="Audiologists">Audiologists</option>
+                          <option value="Cardiologists">Cardiologists</option>
+                          <option value="Endocrinologist" selected="">Endocrinologist</option>
+                          <option value="Oncologists">Oncologists</option>
+                          <option value="Neurology">Neurology</option>
+                          <option value="Orthopedics">Orthopedics</option>
+                          <option value="Gynaecology">Gynaecology</option>
+                          <option value="Microbiology">Microbiology</option>
+                        </select>
+                      </div>
+                      <div class="form-group col-md-4">
+                        <div class="form-label">Appointment With</div>
+                        <input class="form-control" type="text" value="Dr. Hal Appeno" placeholder="Enter Doctor Name">
+                      </div>
+                      <div class="form-group col-md-4">
+                        <div class="form-label">Appointment Date                                 </div>
+                        <input class="datepicker-here form-control" type="text" value="20/03/2023" data-date-format="dd/mm/yyyy" data-language="en" placeholder="Select Appointment Date">
+                      </div>
+                      <div class="form-group col-md-4">
+                        <div class="form-label">Appointment Time                                 </div>
+                        <input class="form-control" type="time" value="09:45:00">
+                      </div>
+                      <div class="form-group col-md-4">
+                        <div class="form-label">Phone             </div>
+                        <input class="form-control" value="+1 50 456XXX" type="text" placeholder="">
+                      </div>
+                      <div class="form-group col-md-4">
+                        <div class="form-label">Email             </div>
+                        <input class="form-control" value="example@email.com" type="text" placeholder="">
+                      </div>
+                      <div class="form-group col-md-4">
+                        <div class="form-label">City</div>
+                        <select class="form-select hidesearch" name="bloodgroup[]" multiple="">
+                          <option value="">Select City</option>
+                          <option value="Tokyo">Tokyo</option>
+                          <option value="Dubai" selected="">Dubai</option>
+                          <option value="Barcelona" selected="">Barcelona</option>
+                          <option value="Rome">Rome</option>
+                          <option value="Singapore">Singapore</option>
+                          <option value="Amsterdam">Amsterdam</option>
+                          <option value="NewYork">New York   </option>
+                        </select>
+                      </div>
+                      <div class="form-group col-md-4">
+                        <div class="form-label">State</div>
+                        <select class="form-select hidesearch" name="State[]">
+                          <option value="">Select State</option>
+                          <option value="Washington">Washington</option>
+                          <option value="Minnesota" selected="">Minnesota</option>
+                          <option value="Utah">Utah</option>
+                          <option value="Idaho">Idaho</option>
+                        </select>
+                      </div>
+                      <div class="form-group col-md-4">
+                        <div class="form-label">Country</div>
+                        <select class="form-select hidesearch" name="Country[]">
+                          <option value="">Select Country</option>
+                          <option value="japan">japan</option>
+                          <option value="india" selected="">india</option>
+                          <option value="uk">uk</option>
+                          <option value="itly">itly</option>
+                          <option value="usa">usa</option>
+                        </select>
+                      </div>
+                      <div class="form-group col-md-4">
+                        <div class="form-label">Postal/zip Code</div>
+                        <input class="form-control" type="text" value="395008" placeholder="Enter Postal/zip Code">
+                      </div>
+                      <div class="form-group col-md-6">
+                        <div class="form-label">Address             </div>
+                        <textarea class="form-control" placeholder="Enter Patient Address">463 Avenida Doutor José Singer,6- Conjunto Residencial Humaitá, São Vicente, SP, Brasil</textarea>
+                      </div>
+                      <div class="form-group col-md-6">
+                        <div class="form-label">Nots</div>
+                        <textarea class="form-control" placeholder="Patient History">Nothing</textarea>
+                      </div>
+                      <div class="form-group text-end mb-0">                    <a class="btn btn-sm btn-primary" href="javascript:void(0);">Submit</a><a class="btn btn-sm btn-danger ml-8" href="javascript:void(0);">Cancle</a></div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- theme body end-->
+    </div>
+    <!-- footer start-->
+      <footer class="codex-footer">
+        <p>Copyright 2022-23 © medixo All rights reserved.</p>
+      </footer>
+        <div class="scroll-top"><i class="fa fa-angle-double-up"></i></div>
+    <!-- footer end-->
+      <!-- main jquery-->
+      <script src="../assets/js/jquery-3.7.0.min.js"></script>
+      <!-- Feather iocns js-->
+      <script src="../assets/js/icons/feather-icon/feather.js"></script>
+      <!-- Bootstrap js-->
+      <script src="../assets/js/bootstrap.bundle.min.js"></script>
+      <script src="../assets/js/vendors/notify/bootstrap-notify.js"></script>
+      <script src="../assets/js/vendors/notify/bootstrap-customnotify.js"></script>
+      <!-- customizer-->
+      <script src="../assets/js/customizer.js"></script>
+      <!-- Scrollbar-->
+      <script src="../assets/js/vendors/simplebar.js"></script>
+      <!-- select 2 js-->
+      <script src="../assets/js/vendors/select2/select2.min.js"></script>
+      <script src="../assets/js/vendors/select2/custom-select2.js"> </script>
+      <!-- datepicker-->
+      <script src="../assets/js/vendors/datepicker/datepicker.js"></script>
+      <script src="../assets/js/vendors/datepicker/datepicker.en.js"></script>
+      <script src="../assets/js/vendors/datepicker/custom-datepicker.js"></script>
+      <!-- Custom script-->
+      <script src="../assets/js/custom-script.js"></script>
+
+      <script>
+        $(document).ready(function(){
+          $('.toggle-dropdown').click(function(){
+            $(this).siblings('.submenu-list').toggle();
+          });
+        });
+      </script>
+  </body>
+</html>

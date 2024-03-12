@@ -1,0 +1,67 @@
+﻿
+{% extends "main.html" %}
+
+{% load static %}
+
+{% comment %} Check for super admin later {% endcomment %}
+{% block 'content' %}
+      <div class="theme-body common-dash" data-simplebar="">
+        <div class="container-fluid">
+          <div class="row">        
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header">
+                  <h4>Search Staff</h4>
+                </div>
+                <div class="card-body"> 
+                  
+                    <div class="row">
+                      <div class="form-group col-md-4">
+                        <form  method="POST" action="{% url 'search_staff' %}">
+                          {% csrf_token %}
+                          <div class="form-label">Search by Keyword</div>
+                          <input type="text" class="form-control" name="keyword">
+                          <div class="form-group col-md-4 pt-5" style="margin-top: 22px;">
+                            <button class="btn btn-sm btn-primary mt-5" type="submit" href="admin-patient-view.html">Search</button>
+                          </div>
+                        </form>
+                      </div>
+    
+                      <div class="form-group col-md-4">
+                        <form  method="POST" action="{% url 'search_staff' %}">
+                          {% csrf_token %}
+                          <div class="form-label">Search by Department</div>
+                          <select class="form-select hidesearch" name="department">
+                            {% for department in departments %}
+                              <option value="{{ department.id }}">{{ department }}</option>
+                            {% endfor %}
+                          </select>
+                          <div class="form-group col-md-4 pt-5" style="margin-top: 22px;">
+                            <button class="btn btn-sm btn-primary mt-5" type="submit" href="admin-patient-view.html">Search</button>
+                          </div>
+                        </form>
+                      </div>
+                   
+                      <div class="form-group col-md-4" >
+                        <form method="POST" action="{% url 'search_staff' %}">
+                          {% csrf_token %}
+                          <div class="form-label">Search All Staff</div>
+                          <select class="form-select hidesearch" name="all">
+                            <option value="all">All Staff</option>
+                          </select>
+                          <div class="form-group col-md-4 pt-5" style="margin-top: 22px;">
+                            <button class="btn btn-sm btn-primary mt-5" type="submit" href="admin-patient-view.html">Search</button>
+                          </div>
+                        </form>
+                      </div>
+                    
+                    </div>
+   
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+{% endblock 'content' %}
+  

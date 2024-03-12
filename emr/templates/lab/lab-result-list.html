@@ -1,0 +1,58 @@
+
+{% extends "main.html" %}
+
+{% load static %}
+
+{% block 'content' %}
+  <!-- theme body start-->
+      <div class="theme-body codex-chat">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-12">
+              <div class="card">  
+                <div class="card-body">
+                  <table class="doctorslist-tbl table" id="doctorslist-tbl" style="width:100%;">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>Department</th>
+                        <th>Specialization</th>
+                        <th>Degree</th>
+                        <th>Mobile</th>
+                        <th>Email</th>
+                        <th>Joining Date</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <div class="d-flex align-items-center">
+                            <a href="patient-details.html" class="d-flex align-items-center">
+                              <span class="ml-10">Dr. Tiger Nixon</span>
+                            </a>
+                          </div>
+                        </td>
+                        <td>Otolaryngology</td>
+                        <td>infertility</td>
+                        <td>M.B.B.S,M.S</td>
+                        <td>+1 50 456589</td>
+                        <td>example@email.com</td>
+                        <td>04/25/2023</td>
+                        <td>
+                          <a href="#"><i class="w-18" data-feather="edit"></i></a>
+                          <a href="#"><i class="w-18" data-feather="eye"></i></a>
+                        </td>
+                      </tr>
+
+                    </tbody>
+                  </table>
+                </div>
+               
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+{% endblock 'content' %}

@@ -1,0 +1,52 @@
+
+{% extends "main.html" %}
+
+{% load static %}
+
+{% block 'content' %}
+  <!-- theme body start-->
+      <div class="theme-body codex-chat">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-12">
+              <div class="card">  
+                <div class="card-body">
+                  <table class="doctorslist-tbl table" id="doctorslist-tbl" style="width:100%;">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>Brand</th>
+                        <th>Price</th>                      
+                        <th>Available Quantity</th>
+                        {% if user.is_store_keeper %}
+                        <th>Action</th>
+                        {% endif %}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for drug in drugs %}
+                      <tr>
+                        <td> {{ drug.name }} </td>
+                        <td> {{ drug.brand }} </td>
+                        <td> <strike>N</strike>{{ drug.price }} </td>
+                        <td> {{ drug.quantity }} </td>
+                        {% if user.is_store_keeper %}
+                        <td>
+                          <a href="{% url "update_drug" drug.id %}"><i class="w-18" data-feather="edit"></i></a>
+                        </td>
+                        {% endif %}
+                      </tr>
+                      {% endfor %}
+                      
+
+                    </tbody>
+                  </table>
+                </div>
+               
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+{% endblock 'content' %}

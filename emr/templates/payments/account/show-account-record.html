@@ -1,0 +1,113 @@
+
+{% extends "main.html" %}
+
+{% load static %}
+
+{% comment %} Check for super admin later {% endcomment %}
+{% block 'content' %}
+      <div class="theme-body common-dash" data-simplebar="">
+        <div class="container-fluid">
+          <div class="row">        
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header">
+                  <h4 class="text-muted" > {{ caption }} Income </h4>
+                </div>
+                <div class="card-body"> 
+
+                  {% if messages %}
+                    {% include "alert.html" %}
+                  {% endif %}
+
+                  <form method="post" class="mb-4">
+                    {% csrf_token %}
+                    <div class="row">
+                        {% for record in records %}
+                        <div class="form-group col-md-3 mx-auto">                     
+                            <label for="{{ record.id }}">{{ record }}</label>
+                            <input type="number" id="{{ record }}" name="{{ record.id }}"
+                            class="form-control" value="{{ record.amount }}" {% if is_approved %}readonly{% endif %} >      
+                        </div> 
+                        {% endfor %}
+                    </div>
+                    {% if user.department.name == "Billing" %}
+                      {% if not is_approved  %}
+                        <button type="submit" class="btn btn-primary">Update</button>
+                      {% endif %}
+                    {% endif %}
+                  </form>
+   
+                    {% if not is_approved %}
+                      {% if user.department.name == "Account" %}
+                      <button type="button" id="approve" class="btn btn-primary" name="approve"
+                      value="{{ records.first.ref_code }}">Approve</button>
+                      {% endif %}
+                    {% else %}
+                    
+                    <a  class="btn btn-success" name="approved" disabled>Approved</a>
+                    
+                    {% endif %}
+                      
+   
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <script>
+        $(document).ready(function() {
+            $('#approve').on('click',  function(){
+                var ref_code = $(this).val();
+                var csrfToken = '{{ csrf_token }}';
+                $.ajax({
+                    url: '{% url "approve_income" %}',
+                    data: {
+                        'ref_code': ref_code,
+                        'approved': 'approve',
+                        'csrfmiddlewaretoken': csrfToken
+                    },
+                    
+                    dataType: 'json',
+                    method: 'post',
+                    success: function(data){
+                        // Check if the response indicates an error
+                        if (data.error) {
+                            cuteAlert({
+                                type: "error",
+                                title: "Error",
+                                message: data.error,
+                                buttonText: "OK"
+                            });
+                        } else {
+                            cuteAlert({
+                                type: "success",
+                                title: "Approved",
+                                message: data.success,
+                                buttonText: "OK"
+                            }).then((value) => {
+                                // Reload the page upon clicking OK
+                                location.reload();
+                            });
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        // Handle AJAX request errors
+                        cuteAlert({
+                            type: "error",
+                            title: "Error",
+                            message: "An error occurred while processing the request. Please try again later.",
+                            buttonText: "OK"
+                        });
+                        
+                    }
+                });
+            });
+        });
+    </script>
+    
+    
+
+{% endblock 'content' %}
+  

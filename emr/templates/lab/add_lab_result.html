@@ -1,0 +1,108 @@
+﻿{% extends "main.html" %}
+
+{% load static %}
+
+{% block 'content' %}
+      <!-- theme body start-->
+      <div class="theme-body common-dash" data-simplebar="">
+        <div class="container-fluid">
+          <div class="row">        
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header">
+                  <h4>Upload Result</h4>
+                </div>
+                <div class="card-body"> 
+                  {% if messages %}
+                  <div class="messages">
+                      {% for message in messages %}
+                      <div class="alert alert-{{ message.tags }}">
+                          {{ message }}
+                      </div>
+                      {% endfor %}
+                  </div>
+                {% endif %}
+                {% if form.errors %}
+                <div class="alert alert-danger">
+                    <ul>
+                        {% for field, errors in form.errors.items %}
+                        {% for error in errors %}
+                        <li>{{ field|title }}: {{ error }}</li>
+                        {% endfor %}
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endif %}
+                {% if exist %}
+                  <div>
+                      <div class="alert alert-info">Result Has Been Uploaded</div>
+                  </div>
+                {% else %}
+                  <div class="col-md-4 form-group ">
+                    <select id="select" class="form-control">
+                      <option value="">Select Upload Medium</option>
+                      <option value="file">File</option>
+                      <option value="type">Type</option>
+                    </select>
+                  </div>
+                {% endif %}
+                  <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="row">
+
+                      <div class="form-group col-md-12">
+                        <div class="form-label">Test</div>
+                        <select name="test" id="" class="form-control" readonly>
+                            <option value="{{ test.id }}">{{ test }}</option>
+                        </select>
+                      </div>
+
+                      
+
+                      <div class="form-group col-md-12 d-none" id="result_file" >
+                        <div class="form-label">Upload File</div>
+                        {{ form.file_name }}
+                      </div>
+                      
+
+                      <div class="form-group col-md-12 d-none" id="type">
+                        <div class="form-label">Enter Result</div>
+                        {{ form.media }}
+                        {{ form.result }}
+                      </div>
+
+                      
+
+                      <div class="form-group text-end mb-0 d-none" id="button" >          
+                          <button class="btn btn-sm btn-primary" type="submit" >Submit</button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- theme body end-->
+
+      <script>
+        $("#select").change(function(){
+           var select = $(this).val();
+           if(select == "file") {
+             $("#result_file").removeClass('d-none')
+             $("#button").removeClass('d-none')
+             $("#type").addClass('d-none')
+           } else if(select == "type") {
+              $("#type").removeClass('d-none')
+              $("#button").removeClass('d-none')
+              $("#result_file").addClass('d-none')
+           } else{
+            $("#type").addClass('d-none')
+            $("#result_file").addClass('d-none')
+            $("#button").addClass('d-none')
+           }
+        })
+      </script>
+ 
+{% endblock 'content' %}

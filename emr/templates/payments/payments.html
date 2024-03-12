@@ -1,0 +1,60 @@
+
+{% extends "main.html" %}
+
+{% load static %}
+
+{% block 'content' %}
+      <!-- theme body start-->
+      <div class="theme-body">       
+        <div class="container-fluid">      
+          <div class="row">
+            <div class="col-12">
+              <div class="card">  
+                <div class="card-body"> 
+                
+                  <table class="payment-tbl table">
+                    <thead>
+                      <tr>
+                        <th>S/N</th>
+                        <th>Patient Name</th>
+                        <th>Doctor Name</th>                      
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    
+                       {% for payment in payments %}
+                      
+                      <tr>
+                          <td>{{ forloop.counter }}</td>
+                          <td>{{ payment.service_id.patient }} </td> 
+                          <td> {{ payment.service_id.doctor }} 
+                            {% if payment.service_id.doctor.is_chief_consultant %}
+                                - Chief Consultant
+                            {% endif %}
+                           </td>  
+                          <td>
+                            {% if payment.payment_status %}
+                            <a href="{% url "invoice" payment.id %}"><i class="w-18" data-feather="eye"></i></a>  
+                            {% else  %}
+                            <a href="{% url "confirm_appointment_payment"  payment.id  %}"><i class="w-18" data-feather="edit"></i></a>  
+                            {% endif %} 
+                      
+                          </td>
+                      </tr>
+                      {% endfor %}
+                      
+                      
+                    </tbody>
+                  </table>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+{% endblock 'content' %}
+    

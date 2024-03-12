@@ -1,0 +1,49 @@
+
+{% extends "main.html" %}
+
+{% load static %}
+
+{% block 'content' %}
+      <!-- theme body start-->
+      <div class="theme-body">       
+        <div class="container-fluid">      
+          <div class="row">
+            <div class="col-12">
+              <div class="card">  
+                <div class="card-body"> 
+                
+                  <table class="payment-tbl table">
+                    <thead>
+                      <tr>
+                        <th>S/N</th>                                            
+                        <th>Total Drug</th>                                                     
+                        <th>Action</th>                      
+                      </tr>
+                    </thead>
+                    <tbody>
+               
+                       {% for prescribed_drug in prescribed_drugs %}
+                      <tr>
+                          <td>{{ forloop.counter }}</td>                           
+                          <td> Number of Drugs - {{ prescribed_drug.total_drugs }} </td>                            
+                          <td>
+                            <a href="{% url "view_prescribed_drugs" prescribed_drug.prescription_id %}">view</a>
+                          </td>
+                         
+                      </tr>
+                      {% endfor %}
+                      
+                      
+                    </tbody>
+                  </table>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+{% endblock 'content' %}
+    

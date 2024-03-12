@@ -1,0 +1,493 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags-->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="">
+    <meta name="keywords" content="admin template, html 5 admin template , medixo admin , dashboard template, bootstrap 5 admin template, responsive admin template">
+    <title id="page-title">ST. CHARLES BORROMEO SPECIALIST HOSPITAL</title>
+    <!-- shortcut icon-->
+    <link rel="shortcut icon" href="{% static 'images/logo/icon-logo.png' %}" type="image/x-icon">
+    <!-- Fonts css-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="../../../css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap" rel="stylesheet">
+    <!-- Font awesome -->
+    <link href="{% static 'css/vendor/font-awesome.css' %}" rel="stylesheet">
+    <link href="{% static 'css/vendor/themify-icons.css' %}" rel="stylesheet">
+    <link href="{% static 'css/vendor/icoicon.css' %}" rel="stylesheet">
+    <!-- Slick slider-->
+    <link href="{% static 'css/vendor/slider/slick-slider/slick.css' %}" rel="stylesheet">
+    <link href="{% static 'css/vendor/slider/slick-slider/slick-theme.css' %}" rel="stylesheet">
+
+    <link href="{% static 'css/vendor/datatable/jquery.dataTables.min.css' %}" rel="stylesheet">
+    {% comment %} <link href="{% static 'css/vendor/datatable/buttons.dataTables.min.css' %}" rel="stylesheet"> {% endcomment %}
+    <!-- Scrollbar-->
+    <link href="{% static 'css/vendor/simplebar.css' %}" rel="stylesheet">
+    <!-- Bootstrap css-->
+    <link href="{% static 'css/vendor/bootstrap.css' %}" rel="stylesheet">
+    <!-- Custom css-->
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    <link href="{% static 'cutealert/style.css' %}" rel="stylesheet">
+    
+    <!-- main jquery-->
+    <script src="{% static 'js/jquery-3.7.0.min.js' %}"></script>
+  </head>
+  <body>
+      <!-- Loader Start-->
+        <div class="codex-loader">
+          <div class="loader-item">
+            <svg class="spinner-pulse" version="1.2" height="210" width="550" xmlns="http://www.w3.org/2000/svg" viewport="0 0 60 60" xmlns:xlink="http://www.w3.org/1999/xlink">
+              <path class="spinnersub-pulse" fill="none" stroke-width="3" stroke-linejoin="round" d="M0,90L250,90Q257,60 262,87T267,95 270,88 273,92t6,35 7,-60T290,127 297,107s2,-11 10,-10 1,1 8,-10T319,95c6,4 8,-6 10,-17s2,10 9,11h210"></path>
+            </svg>
+          </div>
+        </div>
+      <!-- Loader End-->
+      <!-- Header Start-->
+      <header class="codex-header">
+        <div class="flex-between">
+          <div class="header-left d-flex align-items-center">
+            <div class="sidebar-action navicon-wrap"><i data-feather="menu"></i></div>
+            
+          </div>
+          <div class="header-right">
+            <ul class="nav-iconlist">
+             
+            
+              <li class="nav-profile"><a class="action-toggle" href="javascript:void(0)">
+                  <div class="media">
+                    <div class="user-icon"><img class="img-fluid rounded-50" src="{% static 'images/avtar/admin.png' %}" alt="logo"></div>
+                  </div></a>
+                <div class="hover-dropdown navprofile-drop">
+                  <ul>
+                    <li><a href="support.html"><i class="ti-help-alt"></i>help</a></li>
+                    <li><a href="javascript:void(0)"> <i class="ti-settings"></i>setting</a></li>
+                    <li><a href="{% url "logout" %}"><i class="fa fa-sign-out"></i>log out</a></li>
+                  </ul>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="codex-sidebar">
+        <div class="logo-gridwrap"><a class="lightlogo" href="{% url "dashboard" %}"><img class="img-fluid" src="{% static 'images/logo/logo.png' %}" alt="sidebar-lightlogo"></a>
+          <div class="sidebar-action"><i data-feather="menu"></i></div>
+        </div>
+        <div class="icon-logo"><a class="lightlogo" href="{% url "dashboard" %}"><img class="img-fluid" src="{% static 'images/logo/icon-logo.png' %}" alt="sidebar-lightlogo"></a></div>
+        
+        {% if user.department.name == "Admin" %}
+        <ul class="codex-menu custom-scroll mb-0 one" data-simplebar="">
+          <li class="cdxmenu-title">
+            <h5 class="d-flex justify-content-between toggle-dropdown">Admin<i class="fa fa-angle-down"></i></h5>
+            <ul class="submenu-list">
+              <li class="menu-item"><a href="javascript:void(0);">
+                <div class="icon-item"><i class="icofont-home"></i></div><span>Staff</span><i class="fa fa-angle-down"></i></a>
+                <ul class="submenu-list">
+                  <li><a href="{% url "add_staff" %}"><i class="icofont-arrow-right"></i> Add staff</a></li>
+                  <li><a href="{% url "search_staff" %}"><i class="icofont-arrow-right"></i> View staff</a></li>
+                </ul>
+              </li>
+              <li class="menu-item"><a href="javascript:void(0);">
+                  <div class="icon-item"><i class="icofont-doctor-alt"></i></div><span>Patients</span><i class="fa fa-angle-down"></i></a>
+                <ul class="submenu-list">
+                  <li><a href="{% url "search_patient" %}"><i class="icofont-arrow-right"></i> view</a></li>
+                </ul>
+              </li>
+              <li class="menu-item"><a href="javascript:void(0);">
+                  <div class="icon-item"><i class="icofont-paralysis-disability"></i></div><span>Password</span><i class="fa fa-angle-down"></i></a>
+                <ul class="submenu-list">
+                  <li><a href="{% url "change_password" %}"><i class="icofont-arrow-right"></i> Change password</a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li class="menu-item"><a href="javascript:void(0);">
+            <div class="icon-item"><i class="icofont-book"></i></div><span> Income Stream </span><i class="fa fa-angle-down"></i></a>
+            <ul class="submenu-list">
+              <li><a href="{% url "create_income_stream" %}"><i class="icofont-arrow-right"></i> Add Income Stream </a></li>
+              <li><a href="{% url "income_streams"  %}"><i class="icofont-arrow-right"></i>  View Income Streams </a></li>
+            </ul>
+          </li>
+        </ul>
+        {% endif %}
+
+        {% if user.department.name == "Ceo" %}
+        <ul class="codex-menu custom-scroll mb-0 one" data-simplebar="">
+          <li class="cdxmenu-title">
+            <h5 class="d-flex justify-content-between toggle-dropdown">CEO<i class="fa fa-angle-down"></i></h5>
+            <ul class="submenu-list">
+              <li class="menu-item"><a href="javascript:void(0);">
+                <div class="icon-item"><i class="icofont-home"></i></div><span>Staff</span><i class="fa fa-angle-down"></i></a>
+                <ul class="submenu-list">
+                  <li><a href="{% url "search_staff" %}"><i class="icofont-arrow-right"></i> View staff</a></li>
+                </ul>
+              </li>
+              <li class="menu-item"><a href="javascript:void(0);">
+                  <div class="icon-item"><i class="icofont-doctor-alt"></i></div><span>Patients</span><i class="fa fa-angle-down"></i></a>
+                <ul class="submenu-list">
+                  <li><a href="{% url "search_patient" %}"><i class="icofont-arrow-right"></i> view</a></li>
+                  <li><a href="{% url "scheduled_appointments" %}"><i class="icofont-arrow-right"></i> Scheduled Appointments</a></li>
+                </ul>
+              </li>
+
+              <li class="menu-item"><a href="javascript:void(0);">
+                <div class="icon-item"><i class="icofont-home"></i></div><span>Activity</span><i class="fa fa-angle-down"></i></a>
+                <ul class="submenu-list">
+
+                  <li><a href="{% url "generate_bill_report" %}"><i class="icofont-arrow-right"></i> Billing Report </a></li>
+                
+                </ul>
+              </li>
+            
+
+              <li class="menu-item"><a href="javascript:void(0);">
+                  <div class="icon-item"><i class="icofont-paralysis-disability"></i></div><span>Password</span><i class="fa fa-angle-down"></i></a>
+                <ul class="submenu-list">
+                  <li><a href="{% url "change_password" %}"><i class="icofont-arrow-right"></i> Change password</a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        {% endif %}
+
+        
+        {% if user.department.name == "Records" %}
+        <ul class="codex-menu custom-scroll mb-0" data-simplebar="">
+          <li class="cdxmenu-title">
+            <h5 class="d-flex justify-content-between toggle-dropdown">Records<i class="fa fa-angle-down"></i></h5>
+            <ul class="submenu-list">
+              <li class="menu-item"><a href="javascript:void(0);">
+                <div class="icon-item"><i class="icofont-home"></i></div><span>Patient </span><i class="fa fa-angle-down"></i></a>
+                <ul class="submenu-list">
+                  <li><a href="{% url "register_search_card" %}"><i class="icofont-arrow-right"></i> Register </a></li>
+                  <li><a href="{% url "search_patient" %}"><i class="icofont-arrow-right"></i> View</a></li>
+                  <li><a href="{% url "scheduled_appointments" %}"><i class="icofont-arrow-right"></i> Scheduled Appointments</a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        {% endif %}
+
+        {% if user.department.name == "Nursing" %}
+        <ul class="codex-menu custom-scroll mb-0" data-simplebar="">
+          <li class="cdxmenu-title">
+            <h5 class="d-flex justify-content-between toggle-dropdown">Nursing<i class="fa fa-angle-down"></i></h5>
+            <ul class="submenu-list">
+              <li class="menu-item"><a href="javascript:void(0);">
+                <div class="icon-item"><i class="icofont-home"></i></div><span>Patient </span><i class="fa fa-angle-down"></i></a>
+                <ul class="submenu-list">
+                  <li><a href="{% url "search_patient" %}"><i class="icofont-arrow-right"></i> view</a></li>
+                  <li><a href="{% url "appointments" %}"><i class="icofont-arrow-right"></i> view appointment</a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        {% endif %}
+
+        {% if user.department.name == "Billing" %}
+        <ul class="codex-menu custom-scroll mb-0" data-simplebar="">
+          <li class="cdxmenu-title">
+            <h5 class="d-flex justify-content-between toggle-dropdown">Billing<i class="fa fa-angle-down"></i></h5>
+            <ul class="submenu-list">
+
+              <li class="menu-item"><a href="javascript:void(0);">
+                <div class="icon-item"><i class="icofont-user-alt-3"></i></div><span> Patients </span><i class="fa fa-angle-down"></i></a>
+                <ul class="submenu-list">
+                  <li><a href="{% url "search_patient" %}"><i class="icofont-arrow-right"></i> All Patients </a></li>
+                </ul>
+              </li>
+
+              <li class="menu-item"><a href="javascript:void(0);">
+                <div class="icon-item"><i class="icofont-credit-card"></i></div><span> Card Payments </span><i class="fa fa-angle-down"></i></a>
+                <ul class="submenu-list">
+                  <li><a href="{% url "add_card_price" %}"><i class="icofont-arrow-right"></i> Add Card Price </a></li>
+                  <li><a href="{% url "pay_card" %}"><i class="icofont-arrow-right"></i> Pay </a></li>
+                  <li><a href="{% url "card_payment_search" %}"><i class="icofont-arrow-right"></i>  Card Payments </a></li>
+                  {% comment %} <li><a href="{% url "card_registration_payments" 'new' %}"><i class="icofont-arrow-right"></i> Registration Payments</a></li>
+                  <li><a href="{% url "card_renewal_payments" 'renew' %}"><i class="icofont-arrow-right"></i> Registration Payments</a></li> {% endcomment %}
+                </ul>
+              </li>
+              <li class="menu-item"><a href="javascript:void(0);">
+                <div class="icon-item"><i class="icofont-doctor-alt"></i></div><span> Consultation Payments </span><i class="fa fa-angle-down"></i></a>
+                <ul class="submenu-list">
+                  <li><a href="{% url "consultation_payments" 'unpaid' %}"><i class="icofont-arrow-right"></i> View Unpaid </a></li>
+                  <li><a href="{% url "consultation_payments" 'paid' %}"><i class="icofont-arrow-right"></i>  View Paid </a></li>
+                  <li><a href="{% url "consultation_payments" 'all' %}"><i class="icofont-arrow-right"></i> All Payments</a></li>
+                </ul>
+              </li>
+              <li class="menu-item"><a href="javascript:void(0);">
+                <div class="icon-item"><i class="icofont-drug"></i></div><span> Pharmacy Payments </span><i class="fa fa-angle-down"></i></a>
+                <ul class="submenu-list">
+                  <li><a href="{% url "drug_payments" 'unpaid' %}"><i class="icofont-arrow-right"></i> View Unpaid </a></li>
+                  <li><a href="{% url "drug_payments" 'paid' %}"><i class="icofont-arrow-right"></i>  View Paid </a></li>
+                  <li><a href="{% url "drug_payments" 'all' %}"><i class="icofont-arrow-right"></i> All Payments</a></li>
+                </ul>
+              </li>
+              <li class="menu-item"><a href="javascript:void(0);">
+                <div class="icon-item"><i class="icofont-laboratory"></i></div><span> Lab Payments </span><i class="fa fa-angle-down"></i></a>
+                <ul class="submenu-list">
+                  <li><a href="{% url "lab_payments" 'unpaid' %}"><i class="icofont-arrow-right"></i> View Unpaid </a></li>
+                  <li><a href="{% url "lab_payments" 'paid' %}"><i class="icofont-arrow-right"></i>  View Paid </a></li>
+                  <li><a href="{% url "lab_payments" 'all' %}"><i class="icofont-arrow-right"></i> All Payments</a></li>
+                </ul>
+              </li>
+
+              <li class="menu-item"><a href="javascript:void(0);">
+                <div class="icon-item"><i class="icofont-book"></i></div><span> Account </span><i class="fa fa-angle-down"></i></a>
+                <ul class="submenu-list">
+                  <li><a href="{% url "income_streams"  %}"><i class="icofont-arrow-right"></i>  View Income Streams </a></li>
+                  <li><a href="{% url "record_income_stream" %}"><i class="icofont-arrow-right"></i> Record Income</a></li>
+                  <li><a href="{% url "view_income_stream" %}"><i class="icofont-arrow-right"></i> View Record </a></li>
+                </ul>
+              </li>
+
+            </ul>
+          </li>
+        </ul>
+        {% endif %}
+        {% if user.department.name == "Account" %}
+        <ul class="codex-menu custom-scroll mb-0" data-simplebar="">
+          <li class="cdxmenu-title">
+            <h5 class="d-flex justify-content-between toggle-dropdown">Account<i class="fa fa-angle-down"></i></h5>
+            <ul class="submenu-list">
+
+              <li class="menu-item"><a href="javascript:void(0);">
+                <div class="icon-item"><i class="icofont-user-alt-3"></i></div><span> Patients </span><i class="fa fa-angle-down"></i></a>
+                <ul class="submenu-list">
+                  <li><a href="{% url "search_patient" %}"><i class="icofont-arrow-right"></i> All Patients </a></li>
+                </ul>
+              </li>
+
+             
+
+              <li class="menu-item"><a href="javascript:void(0);">
+                <div class="icon-item"><i class="icofont-book"></i></div><span> Income </span><i class="fa fa-angle-down"></i></a>
+                <ul class="submenu-list">
+                  <li><a href="{% url "view_income_stream" %}"><i class="icofont-arrow-right"></i> View Record </a></li>
+                </ul>
+              </li>
+
+            </ul>
+          </li>
+        </ul>
+        {% endif %}
+
+
+        {% if user.department.name == "Lab" %}
+        <ul class="codex-menu custom-scroll mb-0" data-simplebar="">
+          <li class="cdxmenu-title">
+            <h5 class="d-flex justify-content-between toggle-dropdown">Lab<i class="fa fa-angle-down"></i></h5>
+            <ul class="submenu-list">
+              <li class="menu-item"><a href="javascript:void(0);">
+                <div class="icon-item"><i class="icofont-home"></i></div><span>Patient</span><i class="fa fa-angle-down"></i></a>
+                <ul class="submenu-list">
+                  <li><a href="{% url "search_patient" %}"><i class="icofont-arrow-right"></i>All Patients</a></li>
+                </ul>
+              </li>
+            </ul>
+          
+
+            <ul class="submenu-list">
+              <li class="menu-item"><a href="javascript:void(0);">
+                <div class="icon-item"><i class="icofont-home"></i></div><span>Result</span><i class="fa fa-angle-down"></i></a>
+                <ul class="submenu-list">
+
+                  <li><a href="{% url "add_lab_price" %}"><i class="icofont-arrow-right"></i> Add Test Pricing </a></li>
+                  <li><a href="{% url "lab_prices" %}"><i class="icofont-arrow-right"></i> View Test Pricing </a></li>
+                  <li><a href="{% url "lab_tests" %}"><i class="icofont-arrow-right"></i> View Tests</a></li>
+
+                  <li><a href="{% url "search_patient" %}"><i class="icofont-arrow-right"></i> Upload Result</a></li>
+                  {% comment %} <li><a href="{% url "lab_results" %}"><i class="icofont-arrow-right"></i> View Results</a></li> {% endcomment %}
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        {% endif %}
+
+        {% if user.department.name == "Audit" %}
+        <ul class="codex-menu custom-scroll mb-0" data-simplebar="">
+          <li class="cdxmenu-title">
+            <h5 class="d-flex justify-content-between toggle-dropdown">Audit<i class="fa fa-angle-down"></i></h5>
+            <ul class="submenu-list">
+              <li class="menu-item"><a href="javascript:void(0);">
+                <div class="icon-item"><i class="icofont-home"></i></div><span>Patient</span><i class="fa fa-angle-down"></i></a>
+                <ul class="submenu-list">
+                  <li><a href="{% url "search_patient" %}"><i class="icofont-arrow-right"></i>All Patients</a></li>
+                </ul>
+              </li>
+            </ul>
+          
+
+            <ul class="submenu-list">
+              <li class="menu-item"><a href="javascript:void(0);">
+                <div class="icon-item"><i class="icofont-home"></i></div><span>Activity</span><i class="fa fa-angle-down"></i></a>
+                <ul class="submenu-list">
+
+                  <li><a href="{% url "generate_bill_report" %}"><i class="icofont-arrow-right"></i> Generate Report </a></li>
+                
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        {% endif %}
+
+        {% if user.department.name == "Doctor" %}
+        <ul class="codex-menu custom-scroll mb-0" data-simplebar="">
+          <li class="cdxmenu-title">
+            <h5 class="d-flex justify-content-between toggle-dropdown">Doctor<i class="fa fa-angle-down"></i></h5>
+            <ul class="submenu-list">
+              <li class="menu-item"><a href="javascript:void(0);">
+                  <div class="icon-item"><i class="icofont-paralysis-disability"></i></div><span>Patient</span><i class="fa fa-angle-down"></i></a>
+                <ul class="submenu-list">
+                  <li><a href="{% url "search_patient" %}"><i class="icofont-arrow-right"></i> View patients</a></li>
+                  <li><a href="{% url "doctor_appointments" %}"><i class="icofont-arrow-right"></i> View appointments</a></li>
+                  <li><a href="{% url "scheduled_appointments" %}"><i class="icofont-arrow-right"></i> Scheduled Appointments</a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        {% endif %}
+
+        {% if user.department.name == "Pharmacy" %}
+        <ul class="codex-menu custom-scroll mb-0" data-simplebar="">
+          <li class="cdxmenu-title">
+            <h5 class="d-flex justify-content-between toggle-dropdown">Pharmacy<i class="fa fa-angle-down"></i></h5>
+            <ul class="submenu-list">
+              <li class="menu-item"><a href="javascript:void(0);">
+                <div class="icon-item"><i class="icofont-home"></i></div><span>Drugs</span><i class="fa fa-angle-down"></i></a>
+                <ul class="submenu-list" id="men">
+                  {% if user.is_store_keeper %}
+                  <li><a href="{% url "add_drug" %}"><i class="icofont-arrow-right"></i> Add drugs</a></li>
+                  {% endif %}
+                  {% comment %} <li><a href="{% url "sale_drug" %}"><i class="icofont-arrow-right"></i> Drug Sale</a></li> {% endcomment %}
+                  <li><a href="{% url "prescribed_drug" %}"><i class="icofont-arrow-right"></i> Prescribed Drugs</a></li>
+                  <li><a href="{% url "drugs" %}"><i class="icofont-arrow-right"></i> View drugs</a></li>
+                  <li><a href="{% url "drugs_history" %}"><i class="icofont-arrow-right"></i> History </a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        {% endif %}
+
+      </div>
+      <!-- sidebar end-->
+      <!-- Header End-->
+    <div class="themebody-wrap">
+      <!-- breadcrumb start-->
+      <div class="codex-breadcrumb">
+        <div class="container-fluid">
+          <div class="breadcrumb-contain">
+            <div class="left-breadcrumb">
+              <ul class="breadcrumb mb-0">
+                <li class="breadcrumb-item"><a href="index.html"> 
+                    <h1>Dashboard</h1></a></li>
+                <li class="breadcrumb-item active"><a href="javascript:void(0);">Default</a></li>
+              </ul>
+            </div>
+            <div class="right-breadcrumb">
+              <ul>
+                <li>
+                  <div class="bread-wrap"><i class="fa fa-clock-o"></i></div><span class="liveTime"></span>
+                </li>
+                <li>
+                  <div class="bread-wrap"><i class="fa fa-calendar"></i></div><span class="getDate"></span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- breadcrumb end-->
+      <!-- theme body start-->
+      {% block 'content' %}{% endblock 'content' %}
+      <!-- theme body end-->
+    </div>
+    <!-- footer start-->
+      <footer class="codex-footer">
+        <p>Copyright 2022-23 © medixo All rights reserved.</p>
+      </footer>
+        <div class="scroll-top"><i class="fa fa-angle-double-up"></i></div>
+    <!-- footer end-->
+      <!-- main jquery-->
+      <script src="{% static 'js/jquery-3.7.0.min.js' %}"></script>
+      <!-- Feather iocns js-->
+      <script src="{% static 'js/icons/feather-icon/feather.js' %}"></script>
+      <!-- Bootstrap js-->
+      <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+      <script src="{% static 'js/vendors/notify/bootstrap-notify.js' %}"></script>
+      <script src="{% static 'js/vendors/notify/bootstrap-customnotify.js' %}"></script>
+      <!-- customizer-->
+      <script src="{% static 'js/customizer.js' %}"></script>
+      <!-- Scrollbar-->
+      <script src="{% static 'js/vendors/simplebar.js' %}"></script>
+      <!-- apex chart-->
+      <script src="{% static 'js/vendors/chart/apexcharts.js' %}"></script>
+      <!-- slick slider-->
+      <script src="{% static 'js/vendors/slider/slick-sldier/slick.min.js' %}"></script>
+      <!-- hospital dashboard js-->
+      <script src="{% static 'js/dashboard/hospital-dashboard.js' %}"></script>
+
+      <!-- Datatable  -->
+      <script src="{% static 'js/vendors/datatable/jquery.dataTables.min.js' %}"> </script>
+      <script src="{% static 'js/vendors/datatable/dataTables.buttons.min.js' %}"></script>
+      <script src="{% static 'js/vendors/datatable/buttons.print.min.js' %}"> </script>
+      <script src="{% static 'js/vendors/datatable/buttons.html5.min.js' %}"> </script>
+      <script src="{% static 'js/vendors/datatable/pdfmake.min.js' %}"></script>
+      <script src="{% static 'js/vendors/datatable/vfs_fonts.js' %}"> </script>
+      <script src="{% static 'js/vendors/datatable/jszip.min.js' %}"></script>
+      <script src="{% static 'js/vendors/datatable/custom-datatable.js' %}"> </script>
+      <script src="{% static 'cutealert/cute-alert.js' %}"> </script>
+
+      <!-- Custom script-->
+      <script src="{% static 'js/custom-script.js' %}"></script>
+
+      <script>
+        $(document).ready(function(){
+          $('.toggle-dropdown').click(function(){
+            $(this).siblings('.submenu-list').toggle();
+          });
+        });
+      </script>
+
+      {% comment %} for prescription {% endcomment %}
+      <script>
+        function duplicateForm() {
+          var duplicatedInputs = document.querySelector('.duplicated-inputs');
+          var clonedInputs = duplicatedInputs.cloneNode(true);
+          
+          var formsCount = document.querySelectorAll('.themebody-wrap form .duplicated-inputs').length;
+          updateFormIds(clonedInputs, formsCount + 1);
+          
+          var form = document.getElementById("duplicated-inputs-container");
+          form.insertBefore(clonedInputs, form.lastElementChild.previousElementSibling);
+        }
+      
+        function updateFormIds(inputs, suffix) {
+          var elements = inputs.querySelectorAll('[id]');
+          elements.forEach(function(element) {
+            var originalId = element.id;
+            element.id = originalId + '_' + suffix;
+          });
+        }
+      </script>
+
+
+      <script>
+        
+      </script>
+
+      
+  </body>
+</html>

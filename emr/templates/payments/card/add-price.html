@@ -1,0 +1,68 @@
+{% extends "main.html" %}
+
+{% load static %}
+
+{% block 'content' %}
+
+    <div class="theme-body common-dash" data-simplebar="">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-header">
+                <h4>Add Card Price</h4>
+              </div>
+              <div class="card-body"> 
+                {% if messages %}
+                  <div class="messages">
+                      {% for message in messages %}
+                      <div class="alert alert-{{ message.tags }}">
+                          {{ message }}
+                      </div>
+                      {% endfor %}
+                  </div>
+                {% endif %}
+                <form id="cardForm" method="post">
+                    {% csrf_token %}
+                    <div class="row">
+                      <div class="form-group col-md-6">
+                        <div class="form-label">Card</div>
+                        {{ form.card_type }}
+                      </div>
+                    
+                      <div class="form-group col-md-6">
+                        <div class="form-label">Price</div>
+                        {{ form.price }}
+                      </div>
+
+                     
+                      <div class="form-group text-end mb-0">
+                        <button class="btn btn-sm btn-primary" type="submit">Submit</button>
+                      </div>
+                    </div>
+
+                    {% if form.errors %}
+                    <div class="alert alert-danger">
+                        <ul>
+                            {% for field, errors in form.errors.items %}
+                            {% for error in errors %}
+                            <li>{{ field|title }}: {{ error }}</li>
+                            {% endfor %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    {% endif %}
+                </form>
+                
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+   
+{% endblock 'content' %}
+

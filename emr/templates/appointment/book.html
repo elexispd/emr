@@ -1,0 +1,100 @@
+{% extends "main.html" %}
+
+{% load static %}
+
+{% block 'content' %}
+
+    <div class="theme-body common-dash" data-simplebar="">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-header">
+                <h4>Book Appointment For Patient</h4>
+              </div>
+              <div class="card-body"> 
+                {% if messages %}
+                  <div class="messages">
+                      {% for message in messages %}
+                      <div class="alert alert-{{ message.tags }}">
+                          {{ message }}
+                      </div>
+                      {% endfor %}
+                  </div>
+                {% endif %}
+                <form id="patientForm" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="patient" value="{{ patient.id }}">
+                    <input type="hidden" name="status" value="0">
+                    <div class="row">
+                      <div class="form-group col-md-6">
+                        <div class="form-label">Type Of Appointment</div>
+                        {{ form.appointment_type }}
+                      </div>
+                    
+                      <div class="form-group col-md-6 d-none" id="doctor_div">
+                        <div class="form-label">Consulatant</div>
+                        <select name="doctor" class="form-control" id="doctor">
+                            <option value="" selected disabled ></option>
+                            {% for consultant in consultants %}
+                                <option value="{{ consultant.id }}">{{ consultant }} - {{ consultant.department }}</option>
+                            {% endfor %}
+                        </select>
+                      </div>
+
+                      <div class="form-group col-md-6 d-none" id="test_div">
+  
+                          <div class="form-label">Test</div> 
+                          <select name="labprice" class="form-control" id="id_labprice">
+                            <option value="" selected disabled ></option>
+                            {% for test in tests %}
+                                <option value="{{ test.id }}">{{ test.name }} </option>
+                            {% endfor %}
+                        </select>                                        
+                        
+                      </div>
+                    
+                      <div class="form-group text-end mb-0">
+                        <button class="btn btn-sm btn-primary" type="submit">Submit</button>
+                      </div>
+                    </div>
+
+                    {% if form.errors %}
+                    <div class="alert alert-danger">
+                        <ul>
+                            {% for field, errors in form.errors.items %}
+                            {% for error in errors %}
+                            <li>{{ field|title }}: {{ error }}</li>
+                            {% endfor %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    {% endif %}
+                </form>
+                
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+<script>
+  $('#id_appointment_type').change(function(){
+    var a_type = $(this).val();
+    if(a_type == "Consultation") {
+        $('#doctor_div').removeClass('d-none')
+        $('#test_div').addClass('d-none');
+    }
+    
+    if(a_type == "LabTest") {
+      $('#test_div').removeClass('d-none')
+      $('#doctor_div').addClass('d-none');
+    }
+  })
+</script>
+   
+{% endblock 'content' %}
+

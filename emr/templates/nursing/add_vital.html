@@ -1,0 +1,88 @@
+﻿{% extends "main.html" %}
+
+{% load static %}
+
+{% block 'content' %}
+
+    <div class="theme-body common-dash" data-simplebar="">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-header">
+                <h4>{% if has_vitalsigns %}Update Patient Vital{% else %}Add Patient Vital{% endif %}</h4>
+              </div>
+              <div class="card-body"> 
+                {% if messages %}
+                  {% include "alert.html" %}
+                {% endif %}
+                <form id="patientForm" method="POST">
+                  
+                  {% csrf_token %}
+                    <div class="row">
+                      <div class="form-group col-md-4">
+                        <div class="form-label">Weight</div>
+                        {{ form.weight }}
+
+                        {% for error in form.weight.errors %}
+                            <span class="text-danger">{{ error }}</span>
+                        {% endfor %}
+
+                      </div>
+                      <div class="form-group col-md-4">
+                        <div class="form-label">Blood Pressure</div>
+                        {{ form.blood_pressure }}
+
+                        {% for error in form.blood_pressure.errors %}
+                            <span class="text-danger">{{ error }}</span>
+                        {% endfor %}
+
+                      </div>
+
+                      <div class="form-group col-md-4">
+                        <div class="form-label">Pulse Rate</div>
+                        {{ form.pulse_rate }}
+
+                        {% for error in form.pulse_rate.errors %}
+                            <span class="text-danger">{{ error }}</span>
+                        {% endfor %}
+
+                      </div>
+                    
+                      <div class="form-group col-md-4">
+                        <div class="form-label">Temperature</div>
+                        {{ form.temperature }}
+
+                        {% for error in form.temperature.errors %}
+                            <span class="text-danger">{{ error }}</span>
+                        {% endfor %}
+
+                      </div>
+                    
+                      <div class="form-group col-md-4">
+                        <div class="form-label">Note</div>
+                        {{ form.note }}
+
+                        {% for error in form.note.errors %}
+                            <span class="text-danger">{{ error }}</span>
+                        {% endfor %}
+
+
+                      </div>
+                    
+                      <div class="form-group text-end mb-0">
+                        {% if has_vitalsigns %}<a class="btn btn-sm btn-success" type="submit">Vitals Already Taken</a>{% else %}<button class="btn btn-sm btn-primary" type="submit">Submit</button>{% endif %}
+                        
+                      </div>
+                    </div>
+                </form>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+   
+{% endblock 'content' %}

@@ -1,0 +1,66 @@
+﻿
+{% extends "main.html" %}
+
+{% load static %}
+
+{% block 'content' %}
+  <!-- theme body start-->
+      <div class="theme-body codex-chat">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-12">
+              <div class="card">  
+                <div class="card-body">
+                  <table class="doctorslist-tbl table" id="doctorslist-tbl" style="width:100%;">
+                    <thead>
+                      <tr>
+                        <th>S/N</th>
+                        <th>Patient</th>
+                        <th>Test Title</th>
+                        <th>Status</th>
+                        <th>Test Date</th>
+                        <th>Result</th>
+                        
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for test in tests %}
+                      <tr>
+                        <td> {{ forloop.counter }} </td>
+                        <td> {{ test.patient }} </td>
+                        <td> {{ test.name }} </td>
+                        <td> 
+
+                           {% if test.appointment.status == '1' %}
+                            <span class="badge badge-success">Paid</span>
+                            {% else%}
+                            <span class="badge badge-danger">UnPaid</span>
+                            {% endif %}
+                        </td>
+                        <td> {{ test.created_at }} </td>
+                        <td>
+                          {% if test.labresult_set.exists %}
+                              <a href="{% url 'view_lab_result' test.id %}" class="btn btn-primary">View Result</a>
+                          {% else %}
+                          {% if test.appointment.status == '1' %}
+                              <a href="{% url 'add_lab_result' test.id %}" class="btn btn-primary">Add Result</a>
+                              {% else%}
+                              -
+                            {% endif %}
+                          {% endif %}
+                        </td>
+                      </tr>
+                      {% endfor %}
+                     
+
+                    </tbody>
+                  </table>
+                </div>
+               
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+{% endblock 'content' %}

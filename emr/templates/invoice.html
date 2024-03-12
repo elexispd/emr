@@ -1,0 +1,91 @@
+﻿{% extends "main.html" %}
+
+{% load static %}
+
+{% block 'content' %}
+      <!-- theme body start-->
+      <div class="theme-body codex-chat" >
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-12">
+              <div class="card">
+                <div class="card-body cdx-invoice">
+                  <div id="cdx-invoice">
+                    <div class="head-invoice">
+                      <div class="invoice-brand">
+                        <div class="codex-brand"><a class="codexbrand-logo" href="Javascript:void(0);"><img class="img-fluid" src="{% static 'images/logo/logo.png' %}" alt="invoice-logo"></a></div>
+                        <ul class="contact-list">
+                          <li> 
+                            <p>795 Folsom Ave, Opp. Town Hall,<br> CA 54656<br><b>P:</b> +12345647859</p>
+                          </li>
+                        </ul>
+                      </div>
+                      <div class="invoice-user">
+                        <h5>Billed to:</h5>
+                        <ul class="detail-list">
+                          <li>
+                             name :<span>Mark Wongar</span></li>
+                          <li>
+                             Phone :<span>+123585844859                    </span></li>
+                          <li>Address : <span>368 mega get , medixo store</span></li>
+                          <li>invoice date : <span> 21/3/2022</span></li>
+                          <li>invoice no : <span>21/3/2022 </span></li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="body-invoice">
+                      <div class="table-responsive">
+                        <table class="table table-bordered">
+                          <thead>
+                            <tr>
+                              <th>No</th>
+                              <th>Particulars</th>
+                              <th>Quantity</th>
+                              <th>Amount</th>                        
+                              <th>Total</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td>01</td>
+                              <td>Room Charges</td>
+                              <td>9</td>
+                              <td>$80</td>
+                              <td>$180</td>
+                            </tr>
+                            <tr>
+                              <td>02</td>
+                              <td>Nursign</td>
+                              <td>1</td>
+                              <td>$15</td>
+                              <td>$135</td>
+                            </tr>
+                            
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                    <div class="footer-invoice">                
+                      <table class="table">
+                        <tr>
+                          <td>Sub Total</td>
+                          <td>$1400</td>
+                        </tr>
+                        
+                        <tr>
+                          <td>total Bill amount</td>
+                          <td>$1550                 </td>
+                        </tr>
+                      </table>
+                    </div>
+                  </div>
+                  <div class="invoice-action"><a class="btn btn-primary" href="javascript:void(0);" onclick="myFunction()">print invoice</a><a class="btn btn-secondary ml-15" href="javascript:void(0);">download invoice</a></div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+  
+{% endblock 'content' %}

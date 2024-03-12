@@ -1,0 +1,100 @@
+
+{% extends "main.html" %}
+
+{% load static %}
+{% load humanize %}
+
+{% block 'content' %}
+
+  <!-- theme body start-->
+      <div class="theme-body codex-chat">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-12">
+              <div class="card">  
+                <div class="card-body">
+
+                <h4 class="title" style="color: black;"> Generated Result
+                    {% if for %}
+                        for {{ for }}
+                    {% elif range %}
+                    from {{ range }}
+                    {% else %}
+                    {% endif %} 
+                </h4>
+            
+                  <table class="doctorslist-tbl table" id="doctorslist-tbl" style="width:100%;">
+                    <thead>
+                      <tr>
+                        <th>S/N</th>
+                        <th>Purpose</th>
+                        <th>Payment Method</th>
+                        {% if range %}
+                        <th>Payment Date</th>
+                        {% endif %} 
+                        <th>Amount</th>
+                        
+                      </tr> 
+                    </thead>
+                    <tbody>
+
+                      {% for detail in report %}
+                       <tr>
+                        <td> {{ forloop.counter }} </td>
+                        <td>
+                            {% if detail.service_type == 'NewCard' %}
+                            New Card
+                            {% elif  detail.service_type == 'CardRenewal' %}
+                            Card Renewal
+                            {% elif detail.service_type == 'LabTest' %}
+                            Lab Test
+                            {% elif detail.service_type == 'DrugSale' %}
+                            Drug Sale
+                            {% elif detail.service_type == 'Consultation' %}
+                            Consultation
+                            {% else %}
+                            Other
+                            {% endif %}
+                        </td>          
+                        <td class="text-capitalize"> {{ detail.payment_method }} </td>                                                           
+                        {% if range %}
+                        <td class="text-capitalize"> {{ detail.payment_date }} </td>
+                        {% endif %} 
+                        <td class="text-capitalize"> <strike>N</strike>{{ detail.total_amount }} </td>
+                      </tr>
+                       {% endfor %}
+                      
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>S/N</th>
+                            <th></th>
+                            <th></th>                        
+                            
+                            {% if range %}
+                            <th></th>
+                            {% endif %}
+                            <th> <strong><strike>N</strike>{{ total_amount|intcomma }}</strong> </th>
+                        </tr>
+                      </tfoot>
+                    
+                  </table>
+                
+                </div>
+               
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <script>
+        // Dynamically change the title
+        $(document).ready(function() {
+            var pageTitle = "ST. CHARLES BOOROMEO SPECIALIST HOSPITAL";
+            var customCaption = "Billing Report For Audit for 2, May, 2024";
+            $("#page-title").html(pageTitle + " - " + customCaption);
+        });
+    </script>
+
+{% endblock 'content' %}

@@ -1,0 +1,108 @@
+{% extends "main.html" %}
+
+{% load static %}
+
+{% block 'content' %}
+      <!-- theme body start-->
+      <div class="theme-body codex-chat" >
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-12">
+              <div class="card">
+                <div class="card-body cdx-invoice">
+                  <div id="cdx-invoice">
+                    <div class="head-invoice">
+                      <div class="invoice-brand">
+                        <div class="codex-brand"><a class="codexbrand-logo" href="Javascript:void(0);"><img class="img-fluid" src="{% static 'images/logo/logo.png' %}" alt="invoice-logo"></a></div>
+                        <ul class="contact-list">
+                          <li> 
+                            <p>795 Folsom Ave, Opp. Town Hall,<br> CA 54656<br><b>P:</b> +12345647859</p>
+                          </li>
+                        </ul>
+                      </div>
+                      <div class="invoice-user">
+                        <h5>Billed to:</h5>
+                        <ul class="detail-list">
+                          <li>
+                             name :<span> {{ bill.service_id.patient }} </span></li>
+                          <li>
+                             Phone :<span> {{ bill.service_id.patient.phone_number }} </span></li>
+                          {% comment %} <li>Address : <span> {{ bill.service_id.patient.phone_number }} </span></li> {% endcomment %}
+                          <li>invoice date : <span> {{ bill.payment_date }} </span></li>
+                          <li>invoice no : <span> {{ bill.invoice_id }} </span></li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="body-invoice">
+                      <div class="table-responsive">
+                        <table class="table table-bordered">
+                          <thead>
+                            <tr>
+                              <th>No</th>
+                              <th>Particulars</th>
+                              <th>Quantity</th>
+                              <th>Amount</th>                        
+                              <th>Total</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+
+                            {% if bill.service_type == 'DrugSale' %}
+                            {% for sold_drug in sold_drugs %}
+                                <tr>
+                                    <td>{{ forloop.counter }}</td>
+                                    <td>{{ sold_drug.drug.name }} - {{ sold_drug.drug.brand }}</td>
+                                    <td>{{ sold_drug.quantity }}</td>
+                                    <td><strike>N</strike>{{ sold_drug.price }}</td>
+                                    <td><strike>N</strike>{{ sold_drug.total_price }}</td>
+                                </tr>
+                            {% endfor %}
+                        {% else %}
+                            <tr>
+                                <td>1</td>
+                                <td>{{ bill.service_type }}</td>
+                                <td></td>
+                                <td><strike>N</strike>{{ bill.total_amount }}</td>
+                                <td><strike>N</strike>{{ bill.total_amount }}</td>
+                            </tr>
+                        {% endif %}
+                                                       
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                    <div class="footer-invoice">                
+                      <table class="table">
+                        <tr>
+                          <td>Sub Total</td>
+                          <td><strike>N</strike>{{ bill.total_amount }}</td>
+                        </tr>
+                        
+                        <tr>
+                          <td>total Bill amount</td>
+                          <td><strike>N</strike>{{ bill.total_amount }}</td>
+                        </tr>
+                      </table>
+                    </div>
+                  </div>
+                  <div class="invoice-action"><a class="btn btn-primary" href="javascript:void(0);" onclick="printInvoice()">print invoice</a><a class="btn btn-secondary ml-15" href="javascript:void(0);">download invoice</a></div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <script>
+        function printInvoice() {
+            var invoiceContent = document.querySelector('.theme-body.codex-chat');
+            var originalContents = document.body.innerHTML;
+            var printContents = invoiceContent.innerHTML;
+            document.body.innerHTML = printContents;
+            window.print();
+            document.body.innerHTML = originalContents;
+        }
+        </script>
+  
+{% endblock 'content' %}

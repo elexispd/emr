@@ -1,0 +1,54 @@
+
+{% extends "main.html" %}
+
+{% load static %}
+
+{% block 'content' %}
+  <!-- theme body start-->
+      <div class="theme-body codex-chat">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-12">
+              <div class="card">  
+                <div class="card-body">
+                  
+                  <table class="doctorslist-tbl table" id="doctorslist-tbl" style="width:100%;">
+                    <thead>
+                      <tr>
+                        <th>First name</th>
+                        <th>Last name</th>
+                        <th>Phone number</th>
+                        <th>Email</th>
+                        <th>Department</th>
+                        <th>Username</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+
+                      {% for staff in staff_list %}
+                      <tr>
+                        <td> {{ staff.first_name }} </td>
+                        <td> {{ staff.last_name }} </td>
+                        <td>{{ staff.phone_number }}</td>
+                        <td>{{ staff.email }}</td>
+                        <td>{{ staff.department }}</td>
+                        <td>{{ staff.username }}</td>
+                        <td>
+                          <a href="#"><i class="w-18" data-feather="edit"></i></a>
+                          <a href="{% url "view_staff" staff.id %}"><i class="w-18" data-feather="eye"></i></a>
+                        </td>
+                      </tr>
+                      {% endfor %}
+
+                    </tbody>
+                  </table>
+                </div>
+               
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+{% endblock 'content' %}

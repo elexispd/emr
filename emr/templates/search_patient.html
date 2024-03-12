@@ -1,0 +1,85 @@
+﻿
+{% extends "main.html" %}
+
+{% load static %}
+
+{% comment %} Check for super admin later {% endcomment %}
+{% block 'content' %}
+      <div class="theme-body common-dash" data-simplebar="">
+        <div class="container-fluid">
+          <div class="row">        
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header">
+                  <h4>Search Patient</h4>
+                </div>
+                <div class="card-body"> 
+                  {% if messages %}
+                      {% include 'alert.html' %}
+                  {% endif %}
+                    <div class="row">
+                      <div class="form-group col-md-4">
+                        <form  method="POST" action="{% url 'search_patient' %}">
+                          {% csrf_token %}
+                          <div class="form-label">Search by Keyword</div>
+                          <input type="text" class="form-control" name="keyword">
+                          <div class="form-group col-md-4 pt-5" style="margin-top: 22px;">
+                            <button class="btn btn-sm btn-primary mt-5" type="submit" >Search</button>
+                          </div>
+                        </form>
+                      </div>
+    
+                      <div class="form-group col-md-4">
+                        <form  method="POST" action="{% url 'search_patient' %}">
+                          {% csrf_token %}
+                          <div class="form-label">Search by Card Number</div>
+                          <input type="text" class="form-control" name="card_number">
+                          <div class="form-group col-md-4 pt-5" style="margin-top: 22px;">
+                            <button class="btn btn-sm btn-primary mt-5" type="submit" >Search</button>
+                          </div>
+                        </form>
+                      </div>
+                   
+                      <div class="form-group col-md-4" >
+                        <form method="POST" action="{% url 'search_patient' %}">
+                          {% csrf_token %}
+                          <div class="form-label">Search All Patients</div>
+                          <select class="form-select hidesearch" name="all">
+                            <option value="all">All Patients</option>
+                          </select>
+                          <div class="form-group col-md-4 pt-5" style="margin-top: 22px;">
+                            <button class="btn btn-sm btn-primary mt-5" type="submit" >Search</button>
+                          </div>
+                        </form>
+                      </div>
+
+                      <div class="col-md-6">
+                        <form method="POST" action="{% url 'search_patient' %}">
+                            {% csrf_token %}         
+                            <div class="form-label"> <strong>Search By Date</strong>  </div>
+                            <div class="form-group">
+                                <label for="from"> From: </label>
+                                <input type="date" class="form-control" name="from_date" id="from">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="from"> To: </label>
+                                <input type="date" class="form-control" name="to_date" id="to">
+                            </div>
+                            
+                            <div class="form-group col-md-4 pt-5">
+                            <button class="btn btn-sm btn-primary mt-5" name="date_range" type="submit" value="date_rage">Generate</button>
+                            </div>                            
+                        </form>
+                    </div> 
+                    
+                    </div>
+   
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+{% endblock 'content' %}
+  
