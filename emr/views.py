@@ -20,6 +20,8 @@ from django.db.models import Count, Max
 from .utils import *
 from .decorators import department_required
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.forms import PasswordChangeForm
 
 def home(request):
     return render(request, 'main.html')
@@ -1349,8 +1351,123 @@ def generated_bill_report(request):
     
  
 @login_required
+# def change_password(request):
+    
+#     if request.method == 'POST':
+#         form = PasswordChangeForm(request.user, request.POST)
+#         if form.is_valid():
+#             user = form.save()
+#             update_session_auth_hash(request, user)  # Important to keep the user logged in
+#             messages.success(request, 'Your password was successfully updated!')
+#             return redirect('change_password')  # Redirect to the same page after successful password change
+#         else:
+#             messages.error(request, 'Please correct the error below.')
+#     else:
+#         form = PasswordChangeForm(request.user)
+#     return render(request, 'new-password.html', {'form': form})
+
+
+# def change_password(request):
+#     if request.method == 'POST':
+#         form = ChangePasswordForm(request.POST)
+#         if form.is_valid():
+#             # Process form data
+#             new_password = form.cleaned_data['new_password']
+#             confirm_password = form.cleaned_data['confirm_password']
+            
+#             if not new_password  or confirm_password:
+#                 messages.error(request, 'All fields are required', extra_tags='danger')
+#                 return redirect('change_password')
+#             if new_password != confirm_password:
+#                 messages.error(request, 'Password do not match', extra_tags='danger')
+#                 return redirect('change_password')
+              
+#             user = form.save()
+#             update_session_auth_hash(request, user)
+#     else:
+#         form = ChangePasswordForm()
+    
+#     return render(request, 'new-password.html', {'form': form})
+
 def change_password(request):
-    return render(request, 'new-password.html')
+    if request.method == 'POST':
+        form = ChangePasswordForm(request.POST)
+        if form.is_valid():
+            new_password = form.cleaned_data['new_password']
+            confirm_password = form.cleaned_data['confirm_password']
+            
+            if new_password != confirm_password:
+                messages.error(request, 'Passwords do not match', extra_tags='danger')
+                return redirect('change_password')
+            else:
+                # Change the password for the user
+                request.user.set_password(new_password)
+                request.user.save()
+                update_session_auth_hash(request, request.user)
+                messages.success(request, 'Password updated successfully')
+                return redirect('change_password')
+    else:
+        form = ChangePasswordForm()
+    
+    return render(request, 'new-password.html', {'form': form})
+ 
+# def reset_password(request):
+#     if request.method == 'POST':
+#         form = RestPasswordForm(request.POST)
+#         if form.is_valid():
+#             new_password = form.cleaned_data['new_password']
+#             confirm_password = form.cleaned_data['confirm_password']
+            
+            
+#             try:
+#                 username = form.cleaned_data['username']
+            
+#                 if new_password != confirm_password:
+#                     messages.error(request, 'Passwords do not match', extra_tags='danger')
+#                     return redir    ect('reset_password')
+#                 else:
+#                     # Change the password for the user
+#                     request.user.set_password(new_password)
+#                     request.user.save()
+#                     update_session_auth_hash(request, username)
+#                     messages.success(request, 'Password updated successfully')
+#                     return redirect('reset_password')
+#             except ObjectDoesNotExist:
+#                 messages.error(request, f'Staff with staff ID {username} not found', extra_tags='danger')
+#                 return redirect('reset_password')
+#     else:
+#         form = RestPasswordForm()
+    
+#     return render(request, 'staff/reset-password.html', {'form': form})
+
+def reset_password(request):
+    if request.method == 'POST':
+        form = ResetPasswordForm(request.POST)
+        if form.is_valid():
+            new_password = form.cleaned_data['new_password']
+            confirm_password = form.cleaned_data['confirm_password']
+            
+            username = form.cleaned_data['username']
+            
+            try:
+                user = Staff.objects.get(username=username)
+            except ObjectDoesNotExist:
+                messages.error(request, f'Staff with username {username} not found', extra_tags='danger')
+                return redirect('reset_password')
+            
+            if new_password != confirm_password:
+                messages.error(request, 'Passwords do not match', extra_tags='danger')
+                return redirect('reset_password')
+                
+            # Change the password for the user
+            user.set_password(new_password)
+            user.save()
+            messages.success(request, 'Password reset was successfully')
+            return redirect('reset_password')
+    else:
+        form = ResetPasswordForm()
+    
+    return render(request, 'staff/reset-password.html', {'form': form})
  
  
 

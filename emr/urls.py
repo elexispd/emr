@@ -6,6 +6,7 @@ urlpatterns = [
     re_path(r'^$', views.user_login, name="login"),
     re_path(r'^logout/?$', views.logout, name="logout"),
     re_path(r'^change_password/?$', views.change_password, name="change_password"),
+    path('reset_password/', views.reset_password, name='reset_password'),
     re_path(r'^secure/?$', views.dashboard, name="dashboard"),
     re_path(r'^staff/search/?$', views.search_staff, name="search_staff"),
     path('staff/<int:id>/', views.view_staff, name='view_staff'),

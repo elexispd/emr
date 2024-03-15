@@ -1,6 +1,7 @@
 {% load static %}
 
 
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -36,6 +37,27 @@
     
     <!-- main jquery-->
     <script src="{% static 'js/jquery-3.7.0.min.js' %}"></script>
+    <style>
+      .codex-sidebar {
+        background: #222b40;
+      }
+      .codex-sidebar-logo-container {
+        background: #fff;
+      }
+      .codex-menu .cdxmenu-title {
+        /* background: #eef0f6; */
+        /* background: #222b40; */
+      }
+      .codex-menu .cdxmenu-title h5 {
+        color: #fff;
+      }
+      .codex-menu .cdxmenu-title:hover {
+        background: #fff;
+      }
+      .codex-menu .cdxmenu-title:hover h5 {
+        color: #17365d;
+      }
+    </style>
   </head>
   <body>
       <!-- Loader Start-->
@@ -102,17 +124,19 @@
                   <div class="icon-item"><i class="icofont-paralysis-disability"></i></div><span>Password</span><i class="fa fa-angle-down"></i></a>
                 <ul class="submenu-list">
                   <li><a href="{% url "change_password" %}"><i class="icofont-arrow-right"></i> Change password</a></li>
+                  <li><a href="{% url "reset_password" %}"><i class="icofont-arrow-right"></i> Reset Staff password</a></li>
+                </ul>
+              </li>
+              <li class="menu-item"><a href="javascript:void(0);">
+                <div class="icon-item"><i class="icofont-book"></i></div><span> Income Stream </span><i class="fa fa-angle-down"></i></a>
+                <ul class="submenu-list">
+                  <li><a href="{% url "create_income_stream" %}"><i class="icofont-arrow-right"></i> Add Income Stream </a></li>
+                  <li><a href="{% url "income_streams"  %}"><i class="icofont-arrow-right"></i>  View Income Streams </a></li>
                 </ul>
               </li>
             </ul>
           </li>
-          <li class="menu-item"><a href="javascript:void(0);">
-            <div class="icon-item"><i class="icofont-book"></i></div><span> Income Stream </span><i class="fa fa-angle-down"></i></a>
-            <ul class="submenu-list">
-              <li><a href="{% url "create_income_stream" %}"><i class="icofont-arrow-right"></i> Add Income Stream </a></li>
-              <li><a href="{% url "income_streams"  %}"><i class="icofont-arrow-right"></i>  View Income Streams </a></li>
-            </ul>
-          </li>
+          
         </ul>
         {% endif %}
 
@@ -170,6 +194,12 @@
                   <li><a href="{% url "scheduled_appointments" %}"><i class="icofont-arrow-right"></i> Scheduled Appointments</a></li>
                 </ul>
               </li>
+              <li class="menu-item"><a href="javascript:void(0);">
+                <div class="icon-item"><i class="icofont-paralysis-disability"></i></div><span>Password</span><i class="fa fa-angle-down"></i></a>
+              <ul class="submenu-list">
+                <li><a href="{% url "change_password" %}"><i class="icofont-arrow-right"></i> Change password</a></li>
+              </ul>
+            </li>
             </ul>
           </li>
         </ul>
@@ -187,6 +217,12 @@
                   <li><a href="{% url "appointments" %}"><i class="icofont-arrow-right"></i> view appointment</a></li>
                 </ul>
               </li>
+              <li class="menu-item"><a href="javascript:void(0);">
+                <div class="icon-item"><i class="icofont-paralysis-disability"></i></div><span>Password</span><i class="fa fa-angle-down"></i></a>
+              <ul class="submenu-list">
+                <li><a href="{% url "change_password" %}"><i class="icofont-arrow-right"></i> Change password</a></li>
+              </ul>
+            </li>
             </ul>
           </li>
         </ul>
@@ -249,10 +285,18 @@
                 </ul>
               </li>
 
+              <li class="menu-item"><a href="javascript:void(0);">
+                <div class="icon-item"><i class="icofont-paralysis-disability"></i></div><span>Password</span><i class="fa fa-angle-down"></i></a>
+              <ul class="submenu-list">
+                <li><a href="{% url "change_password" %}"><i class="icofont-arrow-right"></i> Change password</a></li>
+              </ul>
+            </li>
+
             </ul>
           </li>
         </ul>
         {% endif %}
+
         {% if user.department.name == "Account" %}
         <ul class="codex-menu custom-scroll mb-0" data-simplebar="">
           <li class="cdxmenu-title">
@@ -274,6 +318,13 @@
                   <li><a href="{% url "view_income_stream" %}"><i class="icofont-arrow-right"></i> View Record </a></li>
                 </ul>
               </li>
+
+              <li class="menu-item"><a href="javascript:void(0);">
+                <div class="icon-item"><i class="icofont-paralysis-disability"></i></div><span>Password</span><i class="fa fa-angle-down"></i></a>
+              <ul class="submenu-list">
+                <li><a href="{% url "change_password" %}"><i class="icofont-arrow-right"></i> Change password</a></li>
+              </ul>
+            </li>
 
             </ul>
           </li>
@@ -308,6 +359,13 @@
                   {% comment %} <li><a href="{% url "lab_results" %}"><i class="icofont-arrow-right"></i> View Results</a></li> {% endcomment %}
                 </ul>
               </li>
+
+              <li class="menu-item"><a href="javascript:void(0);">
+                <div class="icon-item"><i class="icofont-paralysis-disability"></i></div><span>Password</span><i class="fa fa-angle-down"></i></a>
+              <ul class="submenu-list">
+                <li><a href="{% url "change_password" %}"><i class="icofont-arrow-right"></i> Change password</a></li>
+              </ul>
+            </li>
             </ul>
           </li>
         </ul>
@@ -336,6 +394,12 @@
                 
                 </ul>
               </li>
+              <li class="menu-item"><a href="javascript:void(0);">
+                <div class="icon-item"><i class="icofont-paralysis-disability"></i></div><span>Password</span><i class="fa fa-angle-down"></i></a>
+              <ul class="submenu-list">
+                <li><a href="{% url "change_password" %}"><i class="icofont-arrow-right"></i> Change password</a></li>
+              </ul>
+            </li>
             </ul>
           </li>
         </ul>
@@ -354,6 +418,12 @@
                   <li><a href="{% url "scheduled_appointments" %}"><i class="icofont-arrow-right"></i> Scheduled Appointments</a></li>
                 </ul>
               </li>
+              <li class="menu-item"><a href="javascript:void(0);">
+                <div class="icon-item"><i class="icofont-paralysis-disability"></i></div><span>Password</span><i class="fa fa-angle-down"></i></a>
+              <ul class="submenu-list">
+                <li><a href="{% url "change_password" %}"><i class="icofont-arrow-right"></i> Change password</a></li>
+              </ul>
+            </li>
             </ul>
           </li>
         </ul>
@@ -376,10 +446,17 @@
                   <li><a href="{% url "drugs_history" %}"><i class="icofont-arrow-right"></i> History </a></li>
                 </ul>
               </li>
+              <li class="menu-item"><a href="javascript:void(0);">
+                <div class="icon-item"><i class="icofont-paralysis-disability"></i></div><span>Password</span><i class="fa fa-angle-down"></i></a>
+              <ul class="submenu-list">
+                <li><a href="{% url "change_password" %}"><i class="icofont-arrow-right"></i> Change password</a></li>
+              </ul>
+            </li>
             </ul>
           </li>
         </ul>
         {% endif %}
+
 
       </div>
       <!-- sidebar end-->
@@ -416,7 +493,7 @@
     </div>
     <!-- footer start-->
       <footer class="codex-footer">
-        <p>Copyright 2022-23 © medixo All rights reserved.</p>
+        <p> &copy; PESOWP LTD.  All rights reserved.</p>
       </footer>
         <div class="scroll-top"><i class="fa fa-angle-double-up"></i></div>
     <!-- footer end-->

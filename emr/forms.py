@@ -352,6 +352,51 @@ class CardForm(forms.ModelForm):
         })
      
      
+
+class ChangePasswordForm(forms.Form):
+    new_password = forms.CharField(
+        label="New Password",
+        widget=forms.PasswordInput(attrs={'class': 'form-control  showhide-password',
+                                          'placeholder': 'Enter Your New Password',
+                                          'name': 'new_passwprd'
+                                         
+                                          }),
+    )
+    confirm_password = forms.CharField(
+        label="Confirm Password",
+        widget=forms.PasswordInput(attrs={'class': 'form-control  showhide-password',
+                                          'placeholder': 'Re-enter Your Password',
+                                           'name': 'confirm_password',
+                                          }),
+    )
+        
+        
+   
+class ResetPasswordForm(forms.Form):
+    username = forms.CharField(
+        label="Staff Username",
+        widget=forms.TextInput(attrs={'class': 'form-control ',
+                                          'placeholder': 'Enter Staff Username',
+                                          'name': 'username',
+                                          'value': '',
+                                          'autocomplete': 'off'
+                                          }),
+    )
+    new_password = forms.CharField(
+        label="New Password",
+        widget=forms.PasswordInput(attrs={'class': 'form-control  showhide-password',
+                                          'placeholder': 'Enter Your New Password',
+                                          'name': 'new_password'
+                                         
+                                          }),
+    )
+    confirm_password = forms.CharField(
+        label="Confirm Password",
+        widget=forms.PasswordInput(attrs={'class': 'form-control  showhide-password',
+                                          'placeholder': 'Re-enter  Password',
+                                           'name': 'confirm_password',
+                                          }),
+    )
         
         
    
